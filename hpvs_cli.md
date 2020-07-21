@@ -2,7 +2,7 @@
 
 copyright:
   years: 2020
-lastupdated: "2020-07-15"
+lastupdated: "2020-07-21"
 
 keywords: commands, cluster resource, hpvs-cli plugin, hpvs CLI, hpvs-cli command line , hpvs-cli shell
 
@@ -176,7 +176,7 @@ ibmcloud hpvs instance-create NAME PLAN LOCATION [(--ssh SSH-KEY | --ssh-path SS
 <dt>`--rd-path REGISTRATION-DEFINITION-PATH`</dt>
 <dd>File path to the file containing the encrypted and signed registration definition used for BYOI. `--rd` or `--rd-path` is required when using a self-provided image.</dd>
 <dt>`-i IMAGE-TAG`</dt>
-<dd>The image tag for the BYOI server image. Optional.</dd>
+<dd>The image tag for the BYOI server image. Required.</dd>
 <dt>`-g RESOURCE-GROUP-ID | RESOURCE-GROUP-NAME` </dt>
 <dd>The resource group to which your {{site.data.keyword.hpvs}} instance belongs for access control and billing purposes, for example, `Default`. To list all of your resource groups, run `ibmcloud resource groups`. Optional.</dd>
 <dt>`-t TAG` </dt>
