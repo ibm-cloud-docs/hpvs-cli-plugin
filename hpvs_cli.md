@@ -2,7 +2,7 @@
 
 copyright:
   years: 2020
-lastupdated: "2020-07-21"
+lastupdated: "2020-07-15"
 
 keywords: commands, cluster resource, hpvs-cli plugin, hpvs CLI, hpvs-cli command line , hpvs-cli shell
 
@@ -26,13 +26,13 @@ subcollection: hpvs-cli-plugin
 Use the {{site.data.keyword.hpvs}} CLI to list, create, or delete your {{site.data.keyword.cloud}} {{site.data.keyword.hpvs}} instances.
 {:shortdesc}
 
-The {{site.data.keyword.hpvs}} CLI is available for the amd64 architecture on Linux, Windows and Mac.
+The {{site.data.keyword.hpvs}} CLI is available for the amd64 architecture on Linux, Windows, and Mac.
 
 ## Prerequisites
 {: #prerequisites_hpvs_cli_plugin}
 
 
-- Install the [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cloud-cli-getting-started). The prefix for running commands by using the {{site.data.keyword.cloud_notm}} CLI is `ibmcloud`.
+- Install the [{{site.data.keyword.cloud_notm}} CLI](https://cloud.ibm.com/docs/cli?topic=cli-getting-started). The prefix for running commands by using the {{site.data.keyword.cloud_notm}} CLI is `ibmcloud`.
 
 - Install the {{site.data.keyword.cloud_notm}} {{site.data.keyword.hpvs}} CLI by running the following command:
 
@@ -160,23 +160,23 @@ ibmcloud hpvs instance-create NAME PLAN LOCATION [(--ssh SSH-KEY | --ssh-path SS
 <dt>`NAME`</dt>
 <dd>The name of your new instance.</dd>
 <dt>`PLAN`</dt>
-<dd>The name or ID of your service plan, for example, the plan name for a free plan is `lite-s`. Possible values for plan name are: `lite-s`, `entry`, `small` and `medium`.</dd>
+<dd>The name or ID of your service plan, for example, the plan name for a free plan is `lite-s`. The possible values for a plan name are: `lite-s`, `entry`, `small` and `medium`.</dd>
 <dt>`LOCATION`</dt>
-<dd>The target location to create the service instance. Possible values are: `dal10`, `dal12`, `dal13`, `fra02`, `fra04`, `fra05`, `syd01`, `syd04`, `syd05`, `wdc04`, `wdc06`, `wdc07`.</dd>
+<dd>The target location to create the service instance. The possible values are: `dal10`, `dal12`, `dal13`, `fra02`, `fra04`, `fra05`, `syd01`, `syd04`, `syd05`, `wdc04`, `wdc06`, `wdc07`.</dd>
 </dl>
 
 ### Command options
 <dl>
 <dt>`--ssh SSH-KEY` </dt>
-<dd>Public half of the SSH key to access the virtual server later. `--ssh` or `--ssh-path` is required when using an IBM-provided image.</dd>
+<dd>Public half of the SSH key to access the virtual server later. `--ssh` or `--ssh-path` is required when you use an IBM-provided image.</dd>
 <dt>`--ssh-path SSH-KEY-PATH` </dt>
-<dd>File path to the file containing the public half of the SSH key to access the virtual server later. `--ssh` or `--ssh-path` is required when using an IBM-provided image.</dd>
+<dd>File path to the file that contains the public half of the SSH key to access the virtual server later. `--ssh` or `--ssh-path` is required when you use an IBM-provided image.</dd>
 <dt>`--rd REGISTRATION-DEFINITION`</dt>
-<dd>The encrypted and signed registration definition used for [Bring your own server image (BYOI)](https://cloud.ibm.com/docs/hp-virtual-servers?topic=hp-virtual-servers-byoi). `--rd` or `--rd-path` is required when using a self-provided image.</dd>
+<dd>The encrypted and signed registration definition that is used for [Bring your own server image (BYOI)](https://cloud.ibm.com/docs/hp-virtual-servers?topic=hp-virtual-servers-byoi). `--rd` or `--rd-path` is required when you use a self-provided image.</dd>
 <dt>`--rd-path REGISTRATION-DEFINITION-PATH`</dt>
-<dd>File path to the file containing the encrypted and signed registration definition used for BYOI. `--rd` or `--rd-path` is required when using a self-provided image.</dd>
+<dd>File path to the file that contains the encrypted and signed registration definition that is used for BYOI. `--rd` or `--rd-path` is required when you use a self-provided image.</dd>
 <dt>`-i IMAGE-TAG`</dt>
-<dd>The image tag for the BYOI server image. Required if you are using your own image.</dd>
+<dd>The image tag for the BYOI server image. Required if you're using your own image.</dd>
 <dt>`-g RESOURCE-GROUP-ID | RESOURCE-GROUP-NAME` </dt>
 <dd>The resource group to which your {{site.data.keyword.hpvs}} instance belongs for access control and billing purposes, for example, `Default`. To list all of your resource groups, run `ibmcloud resource groups`. Optional.</dd>
 <dt>`-t TAG` </dt>
@@ -201,7 +201,7 @@ Provisioning request for service instance 'crn:v1:staging:public:hpvs:dal13:a/10
 
 
 ## hpvs instance-delete
-
+{: #hpvsinstance_delete}
 
 This command deletes a {{site.data.keyword.hpvs}}.
 
@@ -235,4 +235,4 @@ To irrecoverable delete the instance run the 'ibmcloud resource reclamation-dele
 
 
 {:note}
-When you delete a virtual server from the resource list, the server is not deleted immediately, it is stopped and marked for deletion after a reclamation period of seven days. During this seven day reclamation period you can restore the virtual server or manually trigger a deletion via [resource reclamations](https://cloud.ibm.com/docs/cli?topic=cli-ibmcloud_commands_resource#ibmcloud_resource_reclamations){: external}.
+When you delete a virtual server from the resource list, the server isn't deleted immediately, it's stopped and marked for deletion. It's deleted after a reclamation period of seven days. During this seven-day reclamation period, you can restore the virtual server or manually trigger a deletion via [resource reclamations](https://cloud.ibm.com/docs/cli?topic=cli-ibmcloud_commands_resource#ibmcloud_resource_reclamations){: external}.
