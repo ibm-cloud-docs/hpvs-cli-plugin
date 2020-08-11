@@ -75,7 +75,7 @@ ibmcloud hpvs instances [--output json]
 {: pre}
 
 ### Command options
-
+{: #instances_co}
 <dl>
 <dt>`--output`</dt>
 <dd>Displays results in the requested format. The only valid value is `json`.</dd>
@@ -99,6 +99,7 @@ ibmcloud hpvs instance CRN [--output json]
 </dl>
 
 ### Command options
+{: #details_co}
 
 <dl>
 <dt>`--output`</dt>
@@ -106,6 +107,7 @@ ibmcloud hpvs instance CRN [--output json]
 </dl>
 
 ### Example output
+{: #details_eo}
 
 ```
 Name                     hpvs-VS-test
@@ -124,6 +126,7 @@ Image OS                 ubuntu18.04
 Public Key Fingerprint   TSB2vIhKQ6czqHeIh05IxChkUUnEy4yKnU5Tlpl633U
 ```
 ### Example JSON output during provisioning
+{: #json_eo}
 ```
 {
   "name": "hpvs-VS-test",
@@ -166,6 +169,7 @@ ibmcloud hpvs instance-create NAME PLAN LOCATION [(--ssh SSH-KEY | --ssh-path SS
 </dl>
 
 ### Command options
+{: #create_co}
 <dl>
 <dt>`--ssh SSH-KEY` </dt>
 <dd>Public half of the SSH key to access the virtual server later. `--ssh` or `--ssh-path` is required when you use an IBM-provided image.</dd>
@@ -184,12 +188,14 @@ ibmcloud hpvs instance-create NAME PLAN LOCATION [(--ssh SSH-KEY | --ssh-path SS
 </dl>
 
 ### Example input
+{: #create_ei}
 
 ```
 ibmcloud hpvs instance-create MyHPVS lite-s dal13 -g Default -p "{\"sshPublicKey\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCgguQtzV39LpP/iHAtjwo+4Z5QdASG73dwBlFIsTn5kPOaVYFHhzhvA/xMbLqDpxfYP/YzwU4rXNXMhCr4hlsruPXt5Ak4y83GmnNL8e+oq8lxU/afymje4PcYLnkm8WQvkreIEBaB73VOUKiLSSbdVljUk6a1LB347bCf72Oob8JpY4Pb3N4idrigSoCc+V4JVkz4pXD2Hoyar4J5I2527Ho+vUqdf5FoK9mFRUqtI8NTLKynL2/qVsCgTeUxnOknDjPE0+nqwyNI4toYozcISYb63K9Je6UBT4JaIQXMbdMhDH00wVH7R26SamKqS2iazcUBnZgN4//Vnic+US90ybsqvTuP/OQpHXwfdjshOEsz5PULZKbWgidsfA7aW3pjv1uijCPIrTFOsaAPktMCzhfJzaeFC0VIXweN7/2PT/Zl7U9Ys36CmmLaXfLotXxPWmbGUyRfavPN1Znhqph7v9w94E7JcngQ7sn+l+nkpYg5qdcBFZZ3kNhT4PVRbXE=\"}"
 ```
 
 ### Example output
+{: #create_eo}
 
 ```
 OK
@@ -211,6 +217,7 @@ ibmcloud hpvs instance-delete CRN
 {: codeblock}
 
 ### Command options
+{: #delete_co}
 
 <dl>
 <dt>`CRN`</dt>
@@ -220,6 +227,7 @@ ibmcloud hpvs instance-delete CRN
 </dl>
 
 ### Example output
+{: #delete_eo}
 
 ```
 Are you sure you want to delete the service instance? [y/N]> y
