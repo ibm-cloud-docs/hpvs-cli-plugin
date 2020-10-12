@@ -2,7 +2,7 @@
 
 copyright:
   years: 2020
-lastupdated: "2020-07-15"
+lastupdated: "2020-10-07"
 
 keywords: commands, cluster resource, hpvs-cli plugin, hpvs CLI, hpvs-cli command line , hpvs-cli shell
 
@@ -110,41 +110,51 @@ ibmcloud hpvs instance CRN [--output json]
 {: #details_eo}
 
 ```
-Name                     hpvs-VS-test
-CRN                      crn:v1:staging:public:hpvs:dal13:a/1075962b93044362a562c8deebbfba2e:231fbbf4-1415-4162-86f0-9d50c260106d::
-Location                 dal13
-Cloud State              active
-Server Status            running
-Plan                     Free
-Public IP address        52.116.29.103
-Internal IP address      172.17.151.218
-Storage                  50 GiB
-Memory                   2048 MiB
-Processors               1 vCPUs
-Image Type               ibm-provided
-Image OS                 ubuntu18.04
-Public Key Fingerprint   TSB2vIhKQ6czqHeIh05IxChkUUnEy4yKnU5Tlpl633U
+Name                  hpvs-env-test
+CRN                   crn:v1:staging:public:hpvs:dal13:a/1075962b93044362a562c8deebbfba2e:0b2df6e9-ec2c-4b4a-87dd-60f53f6a2a0d::
+Location              dal13
+Cloud tags
+Cloud state           active
+Server status         running
+Plan                  Free
+Public IP address     52.116.29.73
+Internal IP address   172.17.151.218
+Storage               50 GiB
+Memory                2048 MiB
+Processors            1 vCPUs
+Image type            self-provided
+Image OS              self-defined
+Image name            de.icr.io/hpvs_test/ubuntu:v2
+Environment           TEST_VAR=value
+                      TEST_VAR2=value2
+Last operation        update succeeded
 ```
 ### Example JSON output during provisioning
 {: #json_eo}
 ```
 {
-  "name": "hpvs-VS-test",
-  "crn": "crn:v1:staging:public:hpvs:dal13:a/1075962b93044362a562c8deebbfba2e:231fbbf4-1415-4162-86f0-9d50c260106d::",
+  "name": "hpvs-env-test",
+  "crn": "crn:v1:staging:public:hpvs:dal13:a/1075962b93044362a562c8deebbfba2e:0b2df6e9-ec2c-4b4a-87dd-60f53f6a2a0d::",
   "region_id": "dal13",
+  "tags": [],
   "state": "active",
   "status": "running",
   "resource_plan_title": "Free",
   "resource_plan_id": "bb0005a1-ec13-4ee4-86f4-0c3b15a357d5",
-  "public_ip": "52.116.29.103",
+  "public_ip": "52.116.29.73",
   "internal_ip": "172.17.151.218",
   "storage": 53687091200,
   "memory": 2147483648,
   "vcpu": 1,
-  "image_type": "ibm-provided",
-  "image_os": "ubuntu18.04",
-  "public_key_fingerprint": "TSB2vIhKQ6czqHeIh05IxChkUUnEy4yKnU5Tlpl633U",
-  "free_time_left": 2229325020
+  "image_type": "self-provided",
+  "image_os": "self-defined",
+  "image_name": "de.icr.io/hpvs_test/ubuntu:v2",
+  "free_time_left": 2156814134,
+  "environment": {
+    "TEST_VAR": "value",
+    "TEST_VAR2": "value2"
+  },
+  "last_operation": "update succeeded"
 }
 ```
 
@@ -154,7 +164,7 @@ Public Key Fingerprint   TSB2vIhKQ6czqHeIh05IxChkUUnEy4yKnU5Tlpl633U
 This command creates a new {{site.data.keyword.hpvs}} instance.
 
 ```
-ibmcloud hpvs instance-create NAME PLAN LOCATION [(--ssh SSH-KEY | --ssh-path SSH-KEY-PATH)] [(--rd REGISTRATION-DEFINITION | --rd-path REGISTRATION-DEFINITION-PATH)] [-i IMAGE-TAG] [-g RESOURCE-GROUP-ID] [-t TAG]
+ibmcloud hpvs instance-create NAME PLAN LOCATION [(--ssh SSH-KEY | --ssh-path SSH-KEY-PATH)] [(--rd REGISTRATION-DEFINITION | --rd-path REGISTRATION-DEFINITION-PATH)] [-i IMAGE-TAG] [-e ENV-CONFIG] [-g RESOURCE-GROUP-ID] [-t TAG]
 ```
 {: codeblock}
 
@@ -163,9 +173,9 @@ ibmcloud hpvs instance-create NAME PLAN LOCATION [(--ssh SSH-KEY | --ssh-path SS
 <dt>`NAME`</dt>
 <dd>The name of your new instance.</dd>
 <dt>`PLAN`</dt>
-<dd>The name or ID of your service plan, for example, the plan name for a free plan is `lite-s`. The possible values for a plan name are: `lite-s`, `entry`, `small` and `medium`.</dd>
+<dd>The pricing plan ID or plan name for your Hyper Protect Virtual Server instance, for example, the plan name `lite-s` or its corresponding plan ID `bb0005a1-ec13-4ee4-86f4-0c3b15a357d5`. To list all plans and IDs, run the `ibmcloud catalog service hpvs` command.</dd>
 <dt>`LOCATION`</dt>
-<dd>The target location to create the service instance. The possible values are: `dal10`, `dal12`, `dal13`, `fra02`, `fra04`, `fra05`, `syd01`, `syd04`, `syd05`, `wdc04`, `wdc06`, `wdc07`.</dd>
+<dd>The location ID to deploy your Hyper Protect Virtual Server instance to. To list available locations, run the `ibmcloud catalog service hpvs` command.</dd>
 </dl>
 
 ### Command options
@@ -181,11 +191,15 @@ ibmcloud hpvs instance-create NAME PLAN LOCATION [(--ssh SSH-KEY | --ssh-path SS
 <dd>File path to the file that contains the encrypted and signed registration definition that is used for BYOI. `--rd` or `--rd-path` is required when you use a self-provided image.</dd>
 <dt>`-i IMAGE-TAG`</dt>
 <dd>The image tag for the BYOI server image. Required if you're using your own image.</dd>
-<dt>`-g RESOURCE-GROUP-ID | RESOURCE-GROUP-NAME` </dt>
-<dd>The resource group to which your {{site.data.keyword.hpvs}} instance belongs for access control and billing purposes, for example, `Default`. To list all of your resource groups, run `ibmcloud resource groups`. Optional.</dd>
 <dt>`-t TAG` </dt>
 <dd>Use tags to organize your resources. Tags are visible account-wide. Optional. Multiple tags are permitted, for example, `-t tag1 -t tag2`.</dd>
+<dt>`-g RESOURCE-GROUP-ID | RESOURCE-GROUP-NAME` </dt>
+<dd>The resource group to which your {{site.data.keyword.hpvs}} instance belongs for access control and billing purposes, for example, `Default`. To list all of your resource groups, run `ibmcloud resource groups`. Optional.</dd>
+<dt>`-e ENV-CONFIG`</dt>
+<dd>Specify environment variables if you are using a self-provided image. You must specify the variables in your registration definition first. You can set one or more environment variables as key value pairs by using the `-e` flag, for example, `-ibmcloud hpvs instance-update CRN -i latest -e k1=v1 -e k2='v2 v3'`. Environment variable `names` can have a maximum length of 64 characters and can be numbers, chars and underscore. Environment variable `values` can have a maximum length of 2048.
+</dd>
 </dl>
+
 
 ### Example input
 {: #create_ei}
@@ -204,7 +218,40 @@ Provisioning request for service instance 'crn:v1:staging:public:hpvs:dal13:a/10
  ibmcloud hpvs instance crn:v1:staging:public:hpvs:dal13:a/1075962b93044362a562c8deebbfba2e:98338d1f-910b-4895-9410-453a9c4d9709::
  ```
 
+## hpvs instance-update
+{: #hpvsinstanceupdate}
 
+This command updates a Hyper Protect virtual server instance.
+
+```
+ibmcloud hpvs instance-update CRN [(--rd REGISTRATION-DEFINITION | --rd-path REGISTRATION-DEFINITION-PATH)] [-i IMAGE-TAG] [-e ENV-CONFIG] [--force]
+```
+
+{: pre}
+
+<dl>
+<dt>`CRN`</dt>
+<dd>The server's Cloud resource name (CRN). You can run the `ibmcloud hpvs instances` command to get the CRN.</dd>
+</dl>
+
+### Command options
+{: #details_iu}
+
+<dl>
+<dt>`--rd REGISTRATION-DEFINITION`</dt>
+<dd>The encrypted and signed registration definition that is used for [Bring your own server image (BYOI)](https://cloud.ibm.com/docs/hp-virtual-servers?topic=hp-virtual-servers-byoi). `--rd` or `--rd-path` is optional when you use a self-provided image.</dd>
+<dt>`--rd-path REGISTRATION-DEFINITION-PATH`</dt>
+<dd>File path to the file that contains the encrypted and signed registration definition that is used for BYOI. `--rd` or `--rd-path` is optional when you use a self-provided image.</dd>
+<dt>`-i IMAGE-TAG`</dt>
+<dd>The image tag for the BYOI server image. Required if you're using your own image.</dd>
+<dt>`-e ENV-CONFIG`</dt>
+<dd>Specify environment variables when using a self-provided image. They need to be specified in your registration definition first. You can set one or more environment variables as key value pairs by using the `-e` flag, for example, `-ibmcloud hpvs instance-update CRN -i latest -e k1=v1 -e k2='v2 v3'`. Environment variable `names` can have a maximum length of 64 characters and can be numbers, chars and underscore. Environment variable `values` can have a maximum length of 2048.</dd>
+<dt>`--force`</dt>
+<dd>Forces the update of the {{site.data.keyword.hpvs}} instance without prompting for confirmation.</dd>
+</dl>
+
+{:note}
+To check the status of the update, run `ibmcloud hpvs instance CRN` and check the value of `last operation` in the output.
 
 ## hpvs instance-delete
 {: #hpvsinstance_delete}
@@ -222,8 +269,8 @@ ibmcloud hpvs instance-delete CRN
 <dl>
 <dt>`CRN`</dt>
 <dd>The server's Cloud resource name (CRN). You can run the `ibmcloud hpvs instances` command to get the CRN.</dd>
-<dt>--force</dt>
-<dd>Forces the deletion of the {{site.data.keyword.hpvs}} instance without showing a confirmation prompt.</dd>
+<dt>`--force`</dt>
+<dd>Forces the deletion of the {{site.data.keyword.hpvs}} instance without prompting for confirmation.</dd>
 </dl>
 
 ### Example output
