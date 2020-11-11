@@ -164,7 +164,7 @@ Last operation        update succeeded
 This command creates a new {{site.data.keyword.hpvs}} instance.
 
 ```
-ibmcloud hpvs instance-create NAME PLAN LOCATION [(--ssh SSH-KEY | --ssh-path SSH-KEY-PATH)] [(--rd REGISTRATION-DEFINITION | --rd-path REGISTRATION-DEFINITION-PATH)] [-i IMAGE-TAG] [-e ENV-CONFIG] [-g RESOURCE-GROUP-ID] [-t TAG]
+ibmcloud hpvs instance-create NAME PLAN LOCATION [(--ssh SSH-KEY | --ssh-path SSH-KEY-PATH)] [(--rd REGISTRATION-DEFINITION | --rd-path REGISTRATION-DEFINITION-PATH)] [-i IMAGE-TAG] [-e ENV-CONFIG1 -e ENV-CONFIG2 ...] [-g RESOURCE-GROUP-ID] [-t TAG1 -t TAG2 ...]
 ```
 {: codeblock}
 
@@ -224,7 +224,7 @@ Provisioning request for service instance 'crn:v1:staging:public:hpvs:dal13:a/10
 This command updates a Hyper Protect virtual server instance.
 
 ```
-ibmcloud hpvs instance-update CRN [(--rd REGISTRATION-DEFINITION | --rd-path REGISTRATION-DEFINITION-PATH)] [-i IMAGE-TAG] [-e ENV-CONFIG] [--force]
+ibmcloud hpvs instance-update CRN [(--rd REGISTRATION-DEFINITION | --rd-path REGISTRATION-DEFINITION-PATH)] [-i IMAGE-TAG] [-e ENV-CONFIG1 -e ENV-CONFIG2 ...] [--force]
 ```
 
 {: pre}
