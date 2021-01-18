@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2020
-lastupdated: "2020-10-07"
+  years: 2020, 2021
+lastupdated: "2021-01-13"
 
 keywords: commands, cluster resource, hpvs-cli plugin, hpvs CLI, hpvs-cli command line , hpvs-cli shell
 
@@ -88,14 +88,22 @@ ibmcloud hpvs instances [--output json]
 This command shows details about the server instance.
 
 ```
-ibmcloud hpvs instance CRN [--output json]
+ibmcloud hpvs instance (NAME | CRN) [--output json]
 ```
 {: pre}
 
 
 <dl>
+<dt>`NAME`</dt>
+<dd>The name of your new instance. An error message is displayed if you specify a NAME that is not unique, for example,
+
+```
+VS name 'ABC' is ambiguous: more than one VS exist for the provided name: [crn1 crn2].
+```
+
+Specify the `CRN` if your instance name is not unique.</dd>
 <dt>`CRN`</dt>
-<dd>The server's Cloud resource name (CRN). You can run the `ibmcloud hpvs instances` command to get the CRN.</dd>
+<dd>The server's Cloud resource name (CRN). Specify the `CRN` if `NAME` is not unique. You can run the `ibmcloud hpvs instances` command to get the CRN.</dd>
 </dl>
 
 ### Command options
@@ -196,7 +204,7 @@ ibmcloud hpvs instance-create NAME PLAN LOCATION [(--ssh SSH-KEY | --ssh-path SS
 <dt>`-g RESOURCE-GROUP-ID | RESOURCE-GROUP-NAME` </dt>
 <dd>The resource group to which your {{site.data.keyword.hpvs}} instance belongs for access control and billing purposes, for example, `Default`. To list all of your resource groups, run `ibmcloud resource groups`. Optional.</dd>
 <dt>`-e ENV-CONFIG`</dt>
-<dd>Specify environment variables if you are using a self-provided image. You must specify the variables in your registration definition first. You can set one or more environment variables as key value pairs by using the `-e` flag, for example, `-ibmcloud hpvs instance-update CRN -i latest -e k1=v1 -e k2='v2 v3'`. Environment variable `names` can have a maximum length of 64 characters and can be numbers, chars and underscore. Environment variable `values` can have a maximum length of 2048.
+<dd>Specify environment variables if you are using a self-provided image. You must specify the variables in your registration definition first. You can set one or more environment variables as key value pairs by using the `-e` flag, for example, `-ibmcloud hpvs instance-update CRN -i latest -e k1=v1 -e k2='v2 v3'`. Environment variable `names` can have a maximum length of 64 characters and can be numbers, chars and underscore. Environment variable `values` can have a maximum length of 4096.
 </dd>
 </dl>
 
@@ -224,15 +232,24 @@ Provisioning request for service instance 'crn:v1:staging:public:hpvs:dal13:a/10
 This command updates a Hyper Protect virtual server instance.
 
 ```
-ibmcloud hpvs instance-update CRN [(--rd REGISTRATION-DEFINITION | --rd-path REGISTRATION-DEFINITION-PATH)] [-i IMAGE-TAG] [-e ENV-CONFIG1 -e ENV-CONFIG2 ...] [--force]
+ibmcloud hpvs instance-update (NAME | CRN)  [(--rd REGISTRATION-DEFINITION | --rd-path REGISTRATION-DEFINITION-PATH)] [-i IMAGE-TAG] [-e ENV-CONFIG1 -e ENV-CONFIG2 ...] [--force]
 ```
 
 {: pre}
 
 <dl>
+<dt>`NAME`</dt>
+<dd>The name of your new instance. An error message is displayed if you specify a NAME that is not unique, for example,
+
+```
+VS name 'ABC' is ambiguous: more than one VS exist for the provided name: [crn1 crn2].
+```
+
+Specify the `CRN` if your instance name is not unique.</dd>
 <dt>`CRN`</dt>
-<dd>The server's Cloud resource name (CRN). You can run the `ibmcloud hpvs instances` command to get the CRN.</dd>
+<dd>The server's Cloud resource name (CRN). Specify the `CRN` if `NAME` is not unique. You can run the `ibmcloud hpvs instances` command to get the CRN.</dd>
 </dl>
+
 
 ### Command options
 {: #details_iu}
@@ -245,7 +262,7 @@ ibmcloud hpvs instance-update CRN [(--rd REGISTRATION-DEFINITION | --rd-path REG
 <dt>`-i IMAGE-TAG`</dt>
 <dd>The image tag for the BYOI server image. Required if you're using your own image.</dd>
 <dt>`-e ENV-CONFIG`</dt>
-<dd>Specify environment variables when using a self-provided image. They need to be specified in your registration definition first. You can set one or more environment variables as key value pairs by using the `-e` flag, for example, `-ibmcloud hpvs instance-update CRN -i latest -e k1=v1 -e k2='v2 v3'`. Environment variable `names` can have a maximum length of 64 characters and can be numbers, chars and underscore. Environment variable `values` can have a maximum length of 2048.</dd>
+<dd>Specify environment variables when using a self-provided image. They need to be specified in your registration definition first. You can set one or more environment variables as key value pairs by using the `-e` flag, for example, `-ibmcloud hpvs instance-update CRN -i latest -e k1=v1 -e k2='v2 v3'`. Environment variable `names` can have a maximum length of 64 characters and can be numbers, chars and underscore. Environment variable `values` can have a maximum length of 4096.</dd>
 <dt>`--force`</dt>
 <dd>Forces the update of the {{site.data.keyword.hpvs}} instance without prompting for confirmation.</dd>
 </dl>
@@ -259,7 +276,7 @@ To check the status of the update, run `ibmcloud hpvs instance CRN` and check th
 This command deletes a {{site.data.keyword.hpvs}}.
 
 ```
-ibmcloud hpvs instance-delete CRN
+ibmcloud hpvs instance-delete (NAME | CRN)
 ```
 {: codeblock}
 
@@ -267,8 +284,16 @@ ibmcloud hpvs instance-delete CRN
 {: #delete_co}
 
 <dl>
+<dt>`NAME`</dt>
+<dd>The name of your new instance. An error message is displayed if you specify a NAME that is not unique, for example,
+
+```
+VS name 'ABC' is ambiguous: more than one VS exist for the provided name: [crn1 crn2].
+```
+
+Specify the `CRN` if your instance name is not unique.</dd>
 <dt>`CRN`</dt>
-<dd>The server's Cloud resource name (CRN). You can run the `ibmcloud hpvs instances` command to get the CRN.</dd>
+<dd>The server's Cloud resource name (CRN). Specify the `CRN` if `NAME` is not unique. You can run the `ibmcloud hpvs instances` command to get the CRN.</dd>
 <dt>`--force`</dt>
 <dd>Forces the deletion of the {{site.data.keyword.hpvs}} instance without prompting for confirmation.</dd>
 </dl>
