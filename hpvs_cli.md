@@ -2,7 +2,7 @@
 
 copyright:
   years: 2020, 2021
-lastupdated: "2021-01-13"
+lastupdated: "2021-02-24"
 
 keywords: commands, cluster resource, hpvs-cli plugin, hpvs CLI, hpvs-cli command line , hpvs-cli shell
 
@@ -47,8 +47,12 @@ CLI plug-in, run `ibmcloud plugin show hpvs`.
 You're notified on the command line when updates to the {{site.data.keyword.cloud_notm}} CLI and [plug-ins](https://cloud.ibm.com/docs/cli?topic=cli-plug-ins) are available. Be sure to keep your CLI up to date so that you can use the latest commands. You can view the current version of all installed plug-ins by running `ibmcloud plugin list`.
 {: tip}
 
-{{site.data.keyword.cloud_notm}} CLI requires Java&trade 1.8.0. You can download the CLI from {{site.data.keyword.cloud_notm}} to use on your local system as a complement to the {{site.data.keyword.cloud_notm}} console.
+{{site.data.keyword.cloud_notm}} CLI requires Java 1.8.0. You can download the CLI from {{site.data.keyword.cloud_notm}} to use on your local system as a complement to the {{site.data.keyword.cloud_notm}} console.
 {: note}
+
+Do not use personal information, for example, your name, as the instance name or as part of the instance name. The data that you provide when you provision an instance or interact with the hpvs cli is not considered to be personal data or credentials.
+Learn more about IBM Cloud Hyper Protect Virtual Servers' Data usage and Certifications [here](https://www.ibm.com/software/reports/compatibility/clarity-reports/report/html/softwareReqsForProduct?deliverableId=165C6EF0FFDA11E8BABD512A6952EE1F).
+{:note}
 
 ## CLI commands
 {: #plugin_use}
@@ -171,8 +175,9 @@ Last operation        update succeeded
 
 This command creates a new {{site.data.keyword.hpvs}} instance.
 
+
 ```
-ibmcloud hpvs instance-create NAME PLAN LOCATION [(--ssh SSH-KEY | --ssh-path SSH-KEY-PATH)] [(--rd REGISTRATION-DEFINITION | --rd-path REGISTRATION-DEFINITION-PATH)] [-i IMAGE-TAG] [-e ENV-CONFIG1 -e ENV-CONFIG2 ...] [-g RESOURCE-GROUP-ID] [-t TAG1 -t TAG2 ...]
+ibmcloud hpvs instance-create NAME PLAN LOCATION [(--ssh SSH-KEY | --ssh-path SSH-KEY-PATH)] [(--rd REGISTRATION-DEFINITION | --rd-path REGISTRATION-DEFINITION-PATH)] [-i IMAGE-TAG] [-e ENV-CONFIG1 -e ENV-CONFIG2 ...] [-g RESOURCE-GROUP-ID] [-t TAG1 -t TAG2 ...] [--outbound-only]
 ```
 {: codeblock}
 
@@ -206,6 +211,8 @@ ibmcloud hpvs instance-create NAME PLAN LOCATION [(--ssh SSH-KEY | --ssh-path SS
 <dt>`-e ENV-CONFIG`</dt>
 <dd>Specify environment variables if you are using a self-provided image. You must specify the variables in your registration definition first. You can set one or more environment variables as key value pairs by using the `-e` flag, for example, `-ibmcloud hpvs instance-update CRN -i latest -e k1=v1 -e k2='v2 v3'`. Environment variable `names` can have a maximum length of 64 characters and can be numbers, chars and underscore. Environment variable `values` can have a maximum length of 4096.
 </dd>
+<dt>`--outbound-only`</dt>
+<dd>If this parameter is set, only outbound connections are allowed from your Hyper Protect Virtual Server instance. Use the internal IP address to connect to this Virtual Server from other Virtual Servers created by the same {{site.data.keyword.cloud_notm}} account in the same region.</dd>
 </dl>
 
 
@@ -316,3 +323,122 @@ To irrecoverable delete the instance run the 'ibmcloud resource reclamation-dele
 
 {:note}
 When you delete a virtual server from the resource list, the server isn't deleted immediately, it's stopped and marked for deletion. It's deleted after a reclamation period of seven days. During this seven-day reclamation period, you can restore the virtual server or manually trigger a deletion via [resource reclamations](https://cloud.ibm.com/docs/cli?topic=cli-ibmcloud_commands_resource#ibmcloud_resource_reclamations){: external}.
+
+
+<!--
+## hpvs registration-key-create
+{: #hpvsregistrationkeycreate}
+
+This command creates a Hyper Protect virtual server gpg registration key. The resulting output files are required inputs for the `hpvs registration-create` command, where it is used to sign the registration definition file for the deployment using your own image.
+
+```
+ibmcloud hpvs registration-key-create ID [--gpg-passphrase-path FILE-PATH] [-v VERBOSE]
+```
+{: pre}
+
+<dl>
+<dt>`ID`</dt>
+<dd>The user ID to set for the gpg registration key.
+</dd>
+</dl>
+
+
+### Command options
+{: #reggpgdetails}
+
+<dl>
+<dt>`--gpg-passphrase-path FILE-PATH` </dt>
+<dd>Is the path for the file containing the passphrase that is being used for the registration key. The passphrase must consist of at least 6 characters. If the path is not specified, you are prompted for the passphrase.</dd>
+<dt>`-v, --verbose`</dt>
+<dd>Set to true for verbose output.</dd>
+</dl>
+
+### Example output
+{: #create_regkey}
+```
+$ ibmcloud hpvs registration-key-create abcdefg
+Enter password>
+Successfully created registration key batch file 'abcdefg_registration-batch.txt' in the current working directory.
+
+Successfully generated registration key with gpg.
+
+Successfully exported the public part of the registration key to 'abcdefg.public' in the current working directory.
+
+Successfully exported the private part of the registration key to 'abcdefg.private' in the current working directory.
+
+To use this registration key to generate a registration definition file run 'ibmcloud hpvs registration-create --registration-key-public-path abcdefg.public --registration-key-private-path abcdefg.private
+```
+
+## hpvs registration-create
+{: #hpvsregistrationfilecreate}
+
+This command creates a registration definition file that is required to instantiate a Hyper Protect Virtual Server based on an own image.
+
+```
+ibmcloud hpvs registration-create [--repository-name REPO-NAME] [--cr-username USER-NAME --cr-pwd-path FILE-PATH | --no-auth] [--allowed-env-keys ENV-KEYS | --no-env] [--image-key-id IMAGE-KEY-ID] [--image-key-public-path PUBLIC-KEY] [--registration-key-private-path PRIVATE-KEY-PATH] [--registration-key-public-path PUBLIC-KEY-PATH] [--gpg-passphrase-path PASS-PHRASE]
+```
+{: pre}
+
+If you enter the command without any parameters:
+
+```
+ibmcloud hpvs registration-create
+```
+{: pre}
+you are prompted to enter all the parameters.
+
+If the container registry does not require authentication, set the `-no-auth` parameter to prevent prompting. If no environment parameters are required, set the `-no-env` parameter. For example:
+
+```
+ibmcloud hpvs registration-create --no-env --no-auth
+```
+{: pre}
+
+### Command options
+{: #regfiledetails}
+
+<dl>
+<dt>`--repository-name REPO-NAME`</dt>
+<dd>Is the fully qualified name for the repository.</dd>
+<dt>`--cr-username USER-NAME`</dt>
+<dd>Is the username for the login on the container repository. It can be any string of between 4 and 30 characters.</dd>
+<dt>`--cr-pwd-path FILE-PATH`</dt>
+<dd>Is the path for the file containing the container repository password.</dd>
+<dt>`--no-auth`</dt>
+<dd>Is the parameter that must be set if the image does not require authorization to download. In this case you don't need to provide `cr-username` and `cr-pwd-path` parameters. If you do, these parameters are ignored. </dd>
+<dt>`--allowed-env-keys ENV-KEYS`</dt>
+<dd>Specifies the allowed environment variable keys as a comma-separated list. The keys must be strings of between 1 and 64 characters.</dd>
+<dt>`--no-env`</dt>
+<dd>This parameter can be set if the image does not require any allowed environment variables. In this case you don't need to provide the `allowed-env-keys` parameter. If you do, it is ignored.</dd>
+<dt>`--image-key-id IMAGE-KEY-ID`</dt>
+<dd>The ID of the root key that was used to sign the image. It must contain 64 characters. If the image-key-id is not specified the command first tries to determine the ID automatically by requesting the container registry notary service. Optional.</dd>
+<dt>`--image-key-public-path PUBLIC-KEY`</dt>
+<dd>The path for the file containing the public part of the key that was used to sign the image. The public part of the key must be a minimum of 20 characters and base64 encoded. If the path is not specified, the command first tries to determine the public part of the key automatically by requesting the container registry notary service. Optional.</dd>
+<dt>`--registration-key-public-path PRIVATE-KEY-PATH`</dt>
+<dd>The path for the public key from the registration key pair.</dd>
+<dt>`--registration-key-private-path PUBLIC-KEY-PATH`</dt>
+<dd>The path for the private key from the registration key pair.</dd>
+<dt>`--gpg-passphrase-path PASS-PHRASE` </dt>
+<dd>The path for the file containing the `gpg` passphrase used for the private part of the registration key. The passphrase must consist of at least 6 characters. </dd>
+</dl>
+
+### Example output
+{: #create_regfile}
+
+In this sample the registration-key-create command is run with some, but not all, parameters. The output (the last line in sample) shows the command with all parameters.
+You are prompted for the password and the gpg pass phrase, however you must use the path to a file containing the password and pass phrase for the `--gpg-passphrase-path` parameter. The sample command contains placeholders for those paths.
+
+```
+$ ibmcloud hpvs registration-create --registration-key-public-path abcdefg.public --registration-key-private-path abcdefg.private
+Repository name> docker.io/containers/your-image
+Container registry user name> username
+Container registry password>
+Allowed environment variables as comma separated list> ENV_PARAM
+Gpg pass phrase for the private part of the registration key>
+OK
+The registration file was successfully created in the current working directory: registration.json.asc
+Complete command executed:
+ ibmcloud hpvs registration-create --repository-name=docker.io/containers/your-image --cr-username=username--cr-pwd-path=<PATH> --allowed-env-keys="ENV_PARAM" --registration-key-public-path=abcdefg.public --registration-key-private-path=abcdefg.private --gpg-passphrase-path=<PATH>
+ ```
+
+ -->
