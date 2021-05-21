@@ -2,7 +2,7 @@
 
 copyright:
   years: 2020, 2021
-lastupdated: "2021-02-24"
+lastupdated: "2021-05-13"
 
 keywords: commands, cluster resource, hpvs-cli plugin, hpvs CLI, hpvs-cli command line , hpvs-cli shell
 
@@ -26,7 +26,7 @@ subcollection: hpvs-cli-plugin
 Use the {{site.data.keyword.hpvs}} CLI to list, create, or delete your {{site.data.keyword.cloud}} {{site.data.keyword.hpvs}} instances.
 {:shortdesc}
 
-The {{site.data.keyword.hpvs}} CLI is available for the amd64 architecture on Linux, Windows, and Mac.
+The {{site.data.keyword.hpvs}} CLI is available for the amd64 architecture on Linux&reg;, Windows&reg;, and Mac.
 
 ## Prerequisites
 {: #prerequisites_hpvs_cli_plugin}
@@ -47,7 +47,7 @@ CLI plug-in, run `ibmcloud plugin show hpvs`.
 You're notified on the command line when updates to the {{site.data.keyword.cloud_notm}} CLI and [plug-ins](https://cloud.ibm.com/docs/cli?topic=cli-plug-ins) are available. Be sure to keep your CLI up to date so that you can use the latest commands. You can view the current version of all installed plug-ins by running `ibmcloud plugin list`.
 {: tip}
 
-{{site.data.keyword.cloud_notm}} CLI requires Java 1.8.0. You can download the CLI from {{site.data.keyword.cloud_notm}} to use on your local system as a complement to the {{site.data.keyword.cloud_notm}} console.
+{{site.data.keyword.cloud_notm}} CLI requires Java&reg; 1.8.0. You can download the CLI from {{site.data.keyword.cloud_notm}} to use on your local system as a complement to the {{site.data.keyword.cloud_notm}} console.
 {: note}
 
 Do not use personal information, for example, your name, as the instance name or as part of the instance name. The data that you provide when you provision an instance or interact with the hpvs cli is not considered to be personal data or credentials.
@@ -209,7 +209,7 @@ ibmcloud hpvs instance-create NAME PLAN LOCATION [(--ssh SSH-KEY | --ssh-path SS
 <dt>`-g RESOURCE-GROUP-ID | RESOURCE-GROUP-NAME` </dt>
 <dd>The resource group to which your {{site.data.keyword.hpvs}} instance belongs for access control and billing purposes, for example, `Default`. To list all of your resource groups, run `ibmcloud resource groups`. Optional.</dd>
 <dt>`-e ENV-CONFIG`</dt>
-<dd>Specify environment variables if you are using a self-provided image. You must specify the variables in your registration definition first. You can set one or more environment variables as key value pairs by using the `-e` flag, for example, `-ibmcloud hpvs instance-update CRN -i latest -e k1=v1 -e k2='v2 v3'`. Environment variable `names` can have a maximum length of 64 characters and can be numbers, chars and underscore. Environment variable `values` can have a maximum length of 4096.
+<dd>Specify environment variables if you are using a self-provided image. You must specify the variables in your registration definition first. You can set one or more environment variables as key value pairs by using the `-e` flag, for example, `-ibmcloud hpvs instance-update CRN -i latest -e k1=v1 -e k2='v2 v3'`. Environment variable `names` can have a maximum length of 64 characters and can be numbers, chars, and underscore. Environment variable `values` can have a maximum length of 4096.
 </dd>
 <dt>`--outbound-only`</dt>
 <dd>If this parameter is set, only outbound connections are allowed from your Hyper Protect Virtual Server instance. Use the internal IP address to connect to this Virtual Server from other Virtual Servers created by the same {{site.data.keyword.cloud_notm}} account in the same region.</dd>
@@ -220,7 +220,7 @@ ibmcloud hpvs instance-create NAME PLAN LOCATION [(--ssh SSH-KEY | --ssh-path SS
 {: #create_ei}
 
 ```
-ibmcloud hpvs instance-create MyHPVS lite-s dal13 -g Default -p "{\"sshPublicKey\": \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCgguQtzV39LpP/iHAtjwo+4Z5QdASG73dwBlFIsTn5kPOaVYFHhzhvA/xMbLqDpxfYP/YzwU4rXNXMhCr4hlsruPXt5Ak4y83GmnNL8e+oq8lxU/afymje4PcYLnkm8WQvkreIEBaB73VOUKiLSSbdVljUk6a1LB347bCf72Oob8JpY4Pb3N4idrigSoCc+V4JVkz4pXD2Hoyar4J5I2527Ho+vUqdf5FoK9mFRUqtI8NTLKynL2/qVsCgTeUxnOknDjPE0+nqwyNI4toYozcISYb63K9Je6UBT4JaIQXMbdMhDH00wVH7R26SamKqS2iazcUBnZgN4//Vnic+US90ybsqvTuP/OQpHXwfdjshOEsz5PULZKbWgidsfA7aW3pjv1uijCPIrTFOsaAPktMCzhfJzaeFC0VIXweN7/2PT/Zl7U9Ys36CmmLaXfLotXxPWmbGUyRfavPN1Znhqph7v9w94E7JcngQ7sn+l+nkpYg5qdcBFZZ3kNhT4PVRbXE=\"}"
+ibmcloud hpvs instance-create MyHPVS lite-s dal13 -g Default --ssh "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCgguQtzV39LpP/iHAtjwo+4Z5QdASG73dwBlFIsTn5kPOaVYFHhzhvA/xMbLqDpxfYP/YzwU4rXNXMhCr4hlsruPXt5Ak4y83GmnNL8e+oq8lxU/afymje4PcYLnkm8WQvkreIEBaB73VOUKiLSSbdVljUk6a1LB347bCf72Oob8JpY4Pb3N4idrigSoCc+V4JVkz4pXD2Hoyar4J5I2527Ho+vUqdf5FoK9mFRUqtI8NTLKynL2/qVsCgTeUxnOknDjPE0+nqwyNI4toYozcISYb63K9Je6UBT4JaIQXMbdMhDH00wVH7R26SamKqS2iazcUBnZgN4//Vnic+US90ybsqvTuP/OQpHXwfdjshOEsz5PULZKbWgidsfA7aW3pjv1uijCPIrTFOsaAPktMCzhfJzaeFC0VIXweN7/2PT/Zl7U9Ys36CmmLaXfLotXxPWmbGUyRfavPN1Znhqph7v9w94E7JcngQ7sn+l+nkpYg5qdcBFZZ3kNhT4PVRbXE="
 ```
 
 ### Example output
@@ -269,7 +269,7 @@ Specify the `CRN` if your instance name is not unique.</dd>
 <dt>`-i IMAGE-TAG`</dt>
 <dd>The image tag for the BYOI server image. Required if you're using your own image.</dd>
 <dt>`-e ENV-CONFIG`</dt>
-<dd>Specify environment variables when using a self-provided image. They need to be specified in your registration definition first. You can set one or more environment variables as key value pairs by using the `-e` flag, for example, `-ibmcloud hpvs instance-update CRN -i latest -e k1=v1 -e k2='v2 v3'`. Environment variable `names` can have a maximum length of 64 characters and can be numbers, chars and underscore. Environment variable `values` can have a maximum length of 4096.</dd>
+<dd>Specify environment variables when you use a self-provided image. They need to be specified in your registration definition first. You can set one or more environment variables as key value pairs by using the `-e` flag, for example, `-ibmcloud hpvs instance-update CRN -i latest -e k1=v1 -e k2='v2 v3'`. Environment variable `names` can have a maximum length of 64 characters and can be numbers, chars, and underscore. Environment variable `values` can have a maximum length of 4096.</dd>
 <dt>`--force`</dt>
 <dd>Forces the update of the {{site.data.keyword.hpvs}} instance without prompting for confirmation.</dd>
 </dl>
@@ -322,14 +322,14 @@ To irrecoverable delete the instance run the 'ibmcloud resource reclamation-dele
 
 
 {:note}
-When you delete a virtual server from the resource list, the server isn't deleted immediately, it's stopped and marked for deletion. It's deleted after a reclamation period of seven days. During this seven-day reclamation period, you can restore the virtual server or manually trigger a deletion via [resource reclamations](https://cloud.ibm.com/docs/cli?topic=cli-ibmcloud_commands_resource#ibmcloud_resource_reclamations){: external}.
+When you delete a virtual server from the resource list, the server isn't deleted immediately, it stops and is marked for deletion. It is deleted after a reclamation period of seven days. During this seven-day reclamation period, you can restore the virtual server or manually trigger a deletion thru [resource reclamations](https://cloud.ibm.com/docs/cli?topic=cli-ibmcloud_commands_resource#ibmcloud_resource_reclamations){: external}.
 
 
-<!--
+
 ## hpvs registration-key-create
 {: #hpvsregistrationkeycreate}
 
-This command creates a Hyper Protect virtual server gpg registration key. The resulting output files are required inputs for the `hpvs registration-create` command, where it is used to sign the registration definition file for the deployment using your own image.
+This command creates a Hyper Protect virtual server gpg registration key. The resulting output files are required inputs for the `hpvs registration-create` command, where it is used to sign the registration definition file for the deployment that uses your own image.
 
 ```
 ibmcloud hpvs registration-key-create ID [--gpg-passphrase-path FILE-PATH] [-v VERBOSE]
@@ -348,7 +348,7 @@ ibmcloud hpvs registration-key-create ID [--gpg-passphrase-path FILE-PATH] [-v V
 
 <dl>
 <dt>`--gpg-passphrase-path FILE-PATH` </dt>
-<dd>Is the path for the file containing the passphrase that is being used for the registration key. The passphrase must consist of at least 6 characters. If the path is not specified, you are prompted for the passphrase.</dd>
+<dd>Is the path for the file that contains the passphrase that is being used for the registration key. The passphrase must consist of at least 6 characters. To make sure that a new line is not appended, use `echo` with `-n` or cat with EOF. If the path is not specified, you are prompted for the passphrase.</dd>
 <dt>`-v, --verbose`</dt>
 <dd>Set to true for verbose output.</dd>
 </dl>
@@ -387,7 +387,7 @@ ibmcloud hpvs registration-create
 {: pre}
 you are prompted to enter all the parameters.
 
-If the container registry does not require authentication, set the `-no-auth` parameter to prevent prompting. If no environment parameters are required, set the `-no-env` parameter. For example:
+If the container registry does not require authentication, set the `-no-auth` parameter to prevent prompting. If no environment parameters are required, set the `-no-env` parameter, for example:
 
 ```
 ibmcloud hpvs registration-create --no-env --no-auth
@@ -401,32 +401,32 @@ ibmcloud hpvs registration-create --no-env --no-auth
 <dt>`--repository-name REPO-NAME`</dt>
 <dd>Is the fully qualified name for the repository.</dd>
 <dt>`--cr-username USER-NAME`</dt>
-<dd>Is the username for the login on the container repository. It can be any string of between 4 and 30 characters.</dd>
+<dd>Is the username for the login on the container repository. It can be any string of 4 - 30 characters.</dd>
 <dt>`--cr-pwd-path FILE-PATH`</dt>
-<dd>Is the path for the file containing the container repository password.</dd>
+<dd>Is the path for the file that contains the container repository password.</dd>
 <dt>`--no-auth`</dt>
-<dd>Is the parameter that must be set if the image does not require authorization to download. In this case you don't need to provide `cr-username` and `cr-pwd-path` parameters. If you do, these parameters are ignored. </dd>
+<dd>Is the parameter that must be set if the image does not require authorization to download. In this case, you don't need to provide `cr-username` and `cr-pwd-path` parameters. If you do, these parameters are ignored. </dd>
 <dt>`--allowed-env-keys ENV-KEYS`</dt>
-<dd>Specifies the allowed environment variable keys as a comma-separated list. The keys must be strings of between 1 and 64 characters.</dd>
+<dd>Specifies the allowed environment variable keys as a comma-separated list. The keys must be strings of 1 - 64 characters.</dd>
 <dt>`--no-env`</dt>
-<dd>This parameter can be set if the image does not require any allowed environment variables. In this case you don't need to provide the `allowed-env-keys` parameter. If you do, it is ignored.</dd>
+<dd>This parameter can be set if the image does not require any allowed environment variables. In this case, you don't need to provide the `allowed-env-keys` parameter. If you do, it is ignored.</dd>
 <dt>`--image-key-id IMAGE-KEY-ID`</dt>
-<dd>The ID of the root key that was used to sign the image. It must contain 64 characters. If the image-key-id is not specified the command first tries to determine the ID automatically by requesting the container registry notary service. Optional.</dd>
+<dd>The ID of the root key that was used to sign the image. It must contain 64 characters. If the image-key-id is not specified, the command first tries to determine the ID automatically by requesting the container registry notary service. Optional.</dd>
 <dt>`--image-key-public-path PUBLIC-KEY`</dt>
-<dd>The path for the file containing the public part of the key that was used to sign the image. The public part of the key must be a minimum of 20 characters and base64 encoded. If the path is not specified, the command first tries to determine the public part of the key automatically by requesting the container registry notary service. Optional.</dd>
+<dd>The path for the file that contains the public part of the key that was used to sign the image. The public part of the key must be a minimum of 20 characters and base64 encoded. If the path is not specified, the command first tries to determine the public part of the key automatically by requesting the container registry notary service. Optional.</dd>
 <dt>`--registration-key-public-path PRIVATE-KEY-PATH`</dt>
 <dd>The path for the public key from the registration key pair.</dd>
 <dt>`--registration-key-private-path PUBLIC-KEY-PATH`</dt>
 <dd>The path for the private key from the registration key pair.</dd>
 <dt>`--gpg-passphrase-path PASS-PHRASE` </dt>
-<dd>The path for the file containing the `gpg` passphrase used for the private part of the registration key. The passphrase must consist of at least 6 characters. </dd>
+<dd>The path for the file that contains the `gpg` passphrase used for the private part of the registration key. The passphrase must consist of at least 6 characters. To make sure that a new line is not appended, use `echo` with `-n` or `cat` with EOF. </dd>
 </dl>
 
 ### Example output
 {: #create_regfile}
 
-In this sample the registration-key-create command is run with some, but not all, parameters. The output (the last line in sample) shows the command with all parameters.
-You are prompted for the password and the gpg pass phrase, however you must use the path to a file containing the password and pass phrase for the `--gpg-passphrase-path` parameter. The sample command contains placeholders for those paths.
+In this sample, the registration-key-create command is run with some, but not all, parameters. The output (the last line in sample) shows the command with all parameters.
+You are prompted for the password and the gpg pass phrase. You must use the path to a file that contains the password and pass phrase for the `--gpg-passphrase-path` parameter. The sample command contains placeholders for those paths.
 
 ```
 $ ibmcloud hpvs registration-create --registration-key-public-path abcdefg.public --registration-key-private-path abcdefg.private
@@ -438,7 +438,9 @@ Gpg pass phrase for the private part of the registration key>
 OK
 The registration file was successfully created in the current working directory: registration.json.asc
 Complete command executed:
- ibmcloud hpvs registration-create --repository-name=docker.io/containers/your-image --cr-username=username--cr-pwd-path=<PATH> --allowed-env-keys="ENV_PARAM" --registration-key-public-path=abcdefg.public --registration-key-private-path=abcdefg.private --gpg-passphrase-path=<PATH>
+ ibmcloud hpvs registration-create --repository-name=docker.io/containers/your-image --cr-username=username --cr-pwd-path=<PATH> --allowed-env-keys="ENV_PARAM" --registration-key-public-path=abcdefg.public --registration-key-private-path=abcdefg.private --gpg-passphrase-path=<PATH>
  ```
 
- -->
+
+{:note}
+Optionally, you can add Linux capabilities for your {{site.data.keyword.hpvs}} instance. For more information, see [Adding Linux capabilities to the registration definition file](https://cloud.ibm.com/docs/hp-virtual-servers?topic=hp-virtual-servers-byoi#byoi_regdef){: external}.
