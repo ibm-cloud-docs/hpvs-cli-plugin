@@ -2,7 +2,7 @@
 
 copyright:
   years: 2020, 2021
-lastupdated: "2021-05-13"
+lastupdated: "2021-06-15"
 
 keywords: commands, cluster resource, hpvs-cli plugin, hpvs CLI, hpvs-cli command line , hpvs-cli shell
 
@@ -375,7 +375,7 @@ To use this registration key to generate a registration definition file run 'ibm
 This command creates a registration definition file that is required to instantiate a Hyper Protect Virtual Server based on an own image.
 
 ```
-ibmcloud hpvs registration-create [--repository-name REPO-NAME] [--cr-username USER-NAME --cr-pwd-path FILE-PATH | --no-auth] [--allowed-env-keys ENV-KEYS | --no-env] [--image-key-id IMAGE-KEY-ID] [--image-key-public-path PUBLIC-KEY] [--registration-key-private-path PRIVATE-KEY-PATH] [--registration-key-public-path PUBLIC-KEY-PATH] [--gpg-passphrase-path PASS-PHRASE]
+ibmcloud hpvs registration-create [--repository-name REPO-NAME] [--cr-username USER-NAME --cr-pwd-path FILE-PATH | --no-auth] [--allowed-env-keys ENV-KEYS | --no-env] [--image-key-id IMAGE-KEY-ID] [--image-key-public-path PUBLIC-KEY] [--registration-key-private-path PRIVATE-KEY-PATH] [--registration-key-public-path PUBLIC-KEY-PATH] [--gpg-passphrase-path PASS-PHRASE] --cap-add CAPABILITIES
 ```
 {: pre}
 
@@ -418,8 +418,10 @@ ibmcloud hpvs registration-create --no-env --no-auth
 <dd>The path for the public key from the registration key pair.</dd>
 <dt>`--registration-key-private-path PUBLIC-KEY-PATH`</dt>
 <dd>The path for the private key from the registration key pair.</dd>
-<dt>`--gpg-passphrase-path PASS-PHRASE` </dt>
+<dt>`--gpg-passphrase-path PASS-PHRASE`</dt>
 <dd>The path for the file that contains the `gpg` passphrase used for the private part of the registration key. The passphrase must consist of at least 6 characters. To make sure that a new line is not appended, use `echo` with `-n` or `cat` with EOF. </dd>
+<dt>`--cap-add CAPABILITIES`</dt>
+<dd>The Linux capabilities to be enabled are specified as a comma separated list.</dd>  
 </dl>
 
 ### Example output
@@ -434,13 +436,10 @@ Repository name> docker.io/containers/your-image
 Container registry user name> username
 Container registry password>
 Allowed environment variables as comma separated list> ENV_PARAM
+Allowed Linux capabilities to be enabled as comma separated list> AUDIT_CONTROL,AUDIT_WRITE
 Gpg pass phrase for the private part of the registration key>
 OK
 The registration file was successfully created in the current working directory: registration.json.asc
 Complete command executed:
- ibmcloud hpvs registration-create --repository-name=docker.io/containers/your-image --cr-username=username --cr-pwd-path=<PATH> --allowed-env-keys="ENV_PARAM" --registration-key-public-path=abcdefg.public --registration-key-private-path=abcdefg.private --gpg-passphrase-path=<PATH>
+ ibmcloud hpvs registration-create --repository-name=docker.io/containers/your-image --cr-username=username --cr-pwd-path=<PATH> --allowed-env-keys="ENV_PARAM" --registration-key-public-path=abcdefg.public --cap-add=AUDIT_CONTROL,AUDIT_WRITE --registration-key-private-path=abcdefg.private --gpg-passphrase-path=<PATH>
  ```
-
-
-{:note}
-Optionally, you can add Linux capabilities for your {{site.data.keyword.hpvs}} instance. For more information, see [Adding Linux capabilities to the registration definition file](https://cloud.ibm.com/docs/hp-virtual-servers?topic=hp-virtual-servers-byoi#byoi_regdef){: external}.
