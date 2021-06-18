@@ -2,7 +2,7 @@
 
 copyright:
   years: 2020, 2021
-lastupdated: "2021-06-16"
+lastupdated: "2021-06-18"
 
 keywords: commands, cluster resource, hpvs-cli plugin, hpvs CLI, hpvs-cli command line , hpvs-cli shell
 
@@ -403,7 +403,7 @@ ibmcloud hpvs registration-create --no-env --no-auth
 <dt>`--cr-username USER-NAME`</dt>
 <dd>Is the username for the login on the container repository. It can be any string of 4 - 30 characters.</dd>
 <dt>`--cr-pwd-path FILE-PATH`</dt>
-<dd>Is the path for the file that contains the container repository password.</dd>
+<dd>Is the path to the file that contains the container repository password.</dd>
 <dt>`--no-auth`</dt>
 <dd>Is the parameter that must be set if the image does not require authorization to download. In this case, you don't need to provide `cr-username` and `cr-pwd-path` parameters. If you do, these parameters are ignored. </dd>
 <dt>`--allowed-env-keys ENV-KEYS`</dt>
@@ -419,7 +419,7 @@ ibmcloud hpvs registration-create --no-env --no-auth
 <dt>`--registration-key-private-path PUBLIC-KEY-PATH`</dt>
 <dd>The path for the private key from the registration key pair.</dd>
 <dt>`--gpg-passphrase-path PASS-PHRASE`</dt>
-<dd>The path for the file that contains the `gpg` passphrase used for the private part of the registration key. The passphrase must consist of at least 6 characters. To make sure that a new line is not appended, use `echo` with `-n` or `cat` with EOF. </dd>
+<dd>The path to a file that contains the `gpg` passphrase used for the private part of the registration key. The passphrase must consist of at least 6 characters. To make sure that a new line is not appended, use `echo` with `-n` or `cat` with EOF. </dd>
 <dt>`--cap-add CAPABILITIES`</dt>
 <dd>The Linux capabilities to be enabled are specified as a comma separated list.</dd>  
 </dl>
@@ -428,7 +428,7 @@ ibmcloud hpvs registration-create --no-env --no-auth
 {: #create_regfile}
 
 In this sample, the registration-key-create command is run with some, but not all, parameters. The output (the last line in sample) shows the command with all parameters.
-You are prompted for the password and the gpg pass phrase. You must use the path to a file that contains the password and pass phrase for the `--gpg-passphrase-path` parameter. The sample command contains placeholders for those paths.
+You are prompted for the password and the gpg pass phrase. You must use the path to a file that contains the password for the `--cr-pwd-path parameter` and the path to a file that contains the pass phrase for the `--gpg-passphrase-path` parameter. The sample command contains placeholders for those paths.
 
 ```
 $ ibmcloud hpvs registration-create --registration-key-public-path abcdefg.public --registration-key-private-path abcdefg.private
