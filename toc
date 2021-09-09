@@ -1,9 +1,0 @@
-{:navgroup: .navgroup}
-{:topicgroup: .topicgroup}
-
-{: .toc subcollection="hpvs-cli-plugin" audience="cli" href="/docs/hpvs-cli-plugin/hpvs_cli.html" path="hpvs-cli-plugin"}
-IBM Cloud Hyper Protect Virtual Servers CLI reference
-
-    {: .navgroup id="reference"}
-    hpvs_cli.md
-    {: .navgroup-end}
