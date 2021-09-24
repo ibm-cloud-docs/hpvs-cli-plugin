@@ -101,12 +101,12 @@ ibmcloud hpvs instance (NAME | CRN) [--output json]
 `NAME`
 :   The name of your new instance. An error message is displayed if you specify a NAME that is not unique, for example,
 
-    ```sh
-    VS name 'ABC' is ambiguous: more than one VS exist for the provided name: [crn1 crn2].
-    ```
-    {: pre}
+```sh
+VS name 'ABC' is ambiguous: more than one VS exist for the provided name: [crn1 crn2].
+```
+{: codeblock}
 
-    Specify the `CRN` if your instance name is not unique.
+Specify the `CRN` if your instance name is not unique.
 
 `CRN`
 :   The server's Cloud resource name (CRN). Specify the `CRN` if `NAME` is not unique. You can run the `ibmcloud hpvs instances` command to get the CRN.
@@ -143,6 +143,7 @@ Environment           TEST_VAR=value
                       TEST_VAR2=value2
 Last operation        update succeeded
 ```
+{: codeblock}
 
 ### Example JSON output during provisioning
 {: #json_eo}
@@ -173,6 +174,8 @@ Last operation        update succeeded
   "last_operation": "update succeeded"
 }
 ```
+{: codeblock}
+
 
 ## hpvs instance-create
 {: #create_instance}
@@ -236,6 +239,7 @@ ibmcloud hpvs instance-create NAME PLAN LOCATION [(--ssh SSH-KEY | --ssh-path SS
 ```sh
 ibmcloud hpvs instance-create MyHPVS lite-s dal13 -g Default --ssh "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCgguQtzV39LpP/iHAtjwo+4Z5QdASG73dwBlFIsTn5kPOaVYFHhzhvA/xMbLqDpxfYP/YzwU4rXNXMhCr4hlsruPXt5Ak4y83GmnNL8e+oq8lxU/afymje4PcYLnkm8WQvkreIEBaB73VOUKiLSSbdVljUk6a1LB347bCf72Oob8JpY4Pb3N4idrigSoCc+V4JVkz4pXD2Hoyar4J5I2527Ho+vUqdf5FoK9mFRUqtI8NTLKynL2/qVsCgTeUxnOknDjPE0+nqwyNI4toYozcISYb63K9Je6UBT4JaIQXMbdMhDH00wVH7R26SamKqS2iazcUBnZgN4//Vnic+US90ybsqvTuP/OQpHXwfdjshOEsz5PULZKbWgidsfA7aW3pjv1uijCPIrTFOsaAPktMCzhfJzaeFC0VIXweN7/2PT/Zl7U9Ys36CmmLaXfLotXxPWmbGUyRfavPN1Znhqph7v9w94E7JcngQ7sn+l+nkpYg5qdcBFZZ3kNhT4PVRbXE="
 ```
+{: codeblock}
 
 ### Example output
 {: #create_eo}
@@ -246,6 +250,7 @@ Provisioning request for service instance 'crn:v1:staging:public:hpvs:dal13:a/10
  To check the provisioning status run:
  ibmcloud hpvs instance crn:v1:staging:public:hpvs:dal13:a/1075962b93044362a562c8deebbfba2e:98338d1f-910b-4895-9410-453a9c4d9709::
  ```
+ {: codeblock}
 
 ## hpvs instance-update
 {: #hpvsinstanceupdate}
@@ -261,12 +266,12 @@ ibmcloud hpvs instance-update (NAME | CRN)  [(--rd REGISTRATION-DEFINITION | --r
 `NAME`
 :   The name of your new instance. An error message is displayed if you specify a NAME that is not unique, for example,
 
-    ```sh
-    VS name 'ABC' is ambiguous: more than one VS exist for the provided name: [crn1 crn2].
-    ```
-    {: pre}
+```sh
+VS name 'ABC' is ambiguous: more than one VS exist for the provided name: [crn1 crn2].
+```
+{: codeblock}
 
-    Specify the `CRN` if your instance name is not unique.
+Specify the `CRN` if your instance name is not unique.
 
 `CRN`
 :   The server's Cloud resource name (CRN). Specify the `CRN` if `NAME` is not unique. You can run the `ibmcloud hpvs instances` command to get the CRN.
@@ -314,12 +319,12 @@ ibmcloud hpvs instance-delete (NAME | CRN)
 `NAME`
 :   The name of your new instance. An error message is displayed if you specify a NAME that is not unique, for example,
 
-    ```sh
-    VS name 'ABC' is ambiguous: more than one VS exist for the provided name: [crn1 crn2].
-    ```
-    {: pre}
+```sh
+VS name 'ABC' is ambiguous: more than one VS exist for the provided name: [crn1 crn2].
+```
+{: codeblock}
     
-    Specify the `CRN` if your instance name is not unique.
+Specify the `CRN` if your instance name is not unique.
 
 `CRN`
 :   The server's Cloud resource name (CRN). Specify the `CRN` if `NAME` is not unique. You can run the `ibmcloud hpvs instances` command to get the CRN.
@@ -342,7 +347,7 @@ You can restore a resource within 7 days after you delete it.
 You can run the 'ibmcloud resource reclamations' command to check the resources that you can restore.
 To irrecoverable delete the instance run the 'ibmcloud resource reclamation-delete RECLAMATION_ID' command.
 ```
-
+{: codeblock}
 
 
 When you delete a virtual server from the resource list, the server isn't deleted immediately, it stops and is marked for deletion. It is deleted after a reclamation period of seven days. During this seven-day reclamation period, you can restore the virtual server or manually trigger a deletion thru [resource reclamations](https://cloud.ibm.com/docs/cli?topic=cli-ibmcloud_commands_resource#ibmcloud_resource_reclamations){: external}.
@@ -362,8 +367,6 @@ ibmcloud hpvs registration-key-create ID [--gpg-passphrase-path FILE-PATH] [-v V
 
 `ID`
 :   The user ID to set for the gpg registration key.
-
-
 
 
 ### Command options
@@ -393,6 +396,7 @@ Successfully exported the private part of the registration key to 'abcdefg.priva
 
 To use this registration key to generate a registration definition file run 'ibmcloud hpvs registration-create --registration-key-public-path abcdefg.public --registration-key-private-path abcdefg.private
 ```
+{: codeblock}
 
 ## hpvs registration-create
 {: #hpvsregistrationfilecreate}
@@ -411,7 +415,7 @@ ibmcloud hpvs registration-create
 ```
 {: pre}
 
-you are prompted to enter all the parameters.
+You are prompted to enter all the parameters.
 
 If the container registry does not require authentication, set the `-no-auth` parameter to prevent prompting. If no environment parameters are required, set the `-no-env` parameter, for example:
 
@@ -480,3 +484,5 @@ The registration file was successfully created in the current working directory:
 Complete command executed:
  ibmcloud hpvs registration-create --repository-name=docker.io/containers/your-image --cr-username=username --cr-pwd-path=<PATH> --allowed-env-keys="ENV_PARAM" --registration-key-public-path=abcdefg.public --cap-add=AUDIT_CONTROL,AUDIT_WRITE --registration-key-private-path=abcdefg.private --gpg-passphrase-path=<PATH>
  ```
+{: codeblock}
+
