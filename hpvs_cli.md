@@ -62,7 +62,7 @@ Learn more about IBM Cloud Hyper Protect Virtual Servers' Data usage and Certifi
 
 This command displays a list of hpvs commands.
 
-```
+```sh
 ibmcloud hpvs help
 ```
 {: pre}
@@ -73,7 +73,7 @@ ibmcloud hpvs help
 
 This command lists all your {{site.data.keyword.hpvs}} instances.
 
-```
+```sh
 ibmcloud hpvs instances [--output json]
 ```
 {: pre}
@@ -91,7 +91,7 @@ ibmcloud hpvs instances [--output json]
 
 This command shows details about the server instance.
 
-```
+```sh
 ibmcloud hpvs instance (NAME | CRN) [--output json]
 ```
 {: pre}
@@ -101,7 +101,7 @@ ibmcloud hpvs instance (NAME | CRN) [--output json]
 `NAME`
 :   The name of your new instance. An error message is displayed if you specify a NAME that is not unique, for example,
 
-    ```
+    ```sh
     VS name 'ABC' is ambiguous: more than one VS exist for the provided name: [crn1 crn2].
     ```
 
@@ -122,7 +122,7 @@ ibmcloud hpvs instance (NAME | CRN) [--output json]
 ### Example output
 {: #details_eo}
 
-```
+```json
 Name                  hpvs-env-test
 CRN                   crn:v1:staging:public:hpvs:dal13:a/1075962b93044362a562c8deebbfba2e:0b2df6e9-ec2c-4b4a-87dd-60f53f6a2a0d::
 Location              dal13
@@ -145,7 +145,8 @@ Last operation        update succeeded
 
 ### Example JSON output during provisioning
 {: #json_eo}
-```
+
+```json
 {
   "name": "hpvs-env-test",
   "crn": "crn:v1:staging:public:hpvs:dal13:a/1075962b93044362a562c8deebbfba2e:0b2df6e9-ec2c-4b4a-87dd-60f53f6a2a0d::",
@@ -178,7 +179,7 @@ Last operation        update succeeded
 This command creates a new {{site.data.keyword.hpvs}} instance.
 
 
-```
+```sh
 ibmcloud hpvs instance-create NAME PLAN LOCATION [(--ssh SSH-KEY | --ssh-path SSH-KEY-PATH)] [(--rd REGISTRATION-DEFINITION | --rd-path REGISTRATION-DEFINITION-PATH)] [-i IMAGE-TAG] [-e ENV-CONFIG1 -e ENV-CONFIG2 ...] [-g RESOURCE-GROUP-ID] [-t TAG1 -t TAG2 ...] [--outbound-only]
 ```
 {: codeblock}
@@ -231,14 +232,14 @@ ibmcloud hpvs instance-create NAME PLAN LOCATION [(--ssh SSH-KEY | --ssh-path SS
 ### Example input
 {: #create_ei}
 
-```
+```sh
 ibmcloud hpvs instance-create MyHPVS lite-s dal13 -g Default --ssh "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCgguQtzV39LpP/iHAtjwo+4Z5QdASG73dwBlFIsTn5kPOaVYFHhzhvA/xMbLqDpxfYP/YzwU4rXNXMhCr4hlsruPXt5Ak4y83GmnNL8e+oq8lxU/afymje4PcYLnkm8WQvkreIEBaB73VOUKiLSSbdVljUk6a1LB347bCf72Oob8JpY4Pb3N4idrigSoCc+V4JVkz4pXD2Hoyar4J5I2527Ho+vUqdf5FoK9mFRUqtI8NTLKynL2/qVsCgTeUxnOknDjPE0+nqwyNI4toYozcISYb63K9Je6UBT4JaIQXMbdMhDH00wVH7R26SamKqS2iazcUBnZgN4//Vnic+US90ybsqvTuP/OQpHXwfdjshOEsz5PULZKbWgidsfA7aW3pjv1uijCPIrTFOsaAPktMCzhfJzaeFC0VIXweN7/2PT/Zl7U9Ys36CmmLaXfLotXxPWmbGUyRfavPN1Znhqph7v9w94E7JcngQ7sn+l+nkpYg5qdcBFZZ3kNhT4PVRbXE="
 ```
 
 ### Example output
 {: #create_eo}
 
-```
+```sh
 OK
 Provisioning request for service instance 'crn:v1:staging:public:hpvs:dal13:a/1075962b93044362a562c8deebbfba2e:98338d1f-910b-4895-9410-453a9c4d9709::' was accepted.
  To check the provisioning status run:
@@ -250,7 +251,7 @@ Provisioning request for service instance 'crn:v1:staging:public:hpvs:dal13:a/10
 
 This command updates a Hyper Protect virtual server instance.
 
-```
+```sh
 ibmcloud hpvs instance-update (NAME | CRN)  [(--rd REGISTRATION-DEFINITION | --rd-path REGISTRATION-DEFINITION-PATH)] [-i IMAGE-TAG] [-e ENV-CONFIG1 -e ENV-CONFIG2 ...] [--force]
 ```
 {: pre}
@@ -259,7 +260,7 @@ ibmcloud hpvs instance-update (NAME | CRN)  [(--rd REGISTRATION-DEFINITION | --r
 `NAME`
 :   The name of your new instance. An error message is displayed if you specify a NAME that is not unique, for example,
 
-    ```
+    ```sh
     VS name 'ABC' is ambiguous: more than one VS exist for the provided name: [crn1 crn2].
     ```
 
@@ -299,7 +300,7 @@ To check the status of the update, run `ibmcloud hpvs instance CRN` and check th
 
 This command deletes a {{site.data.keyword.hpvs}}.
 
-```
+```sh
 ibmcloud hpvs instance-delete (NAME | CRN)
 ```
 {: codeblock}
@@ -311,7 +312,7 @@ ibmcloud hpvs instance-delete (NAME | CRN)
 `NAME`
 :   The name of your new instance. An error message is displayed if you specify a NAME that is not unique, for example,
 
-    ```
+    ```sh
     VS name 'ABC' is ambiguous: more than one VS exist for the provided name: [crn1 crn2].
     ```
 
@@ -327,7 +328,7 @@ ibmcloud hpvs instance-delete (NAME | CRN)
 ### Example output
 {: #delete_eo}
 
-```
+```sh
 Are you sure you want to delete the service instance? [y/N]> y
 
 Deleting service instance crn:v1:staging:public:hpvs:dal13:a/1075962b93044362a562c8deebbfba2e:231fbbf4-1415-4162-86f0-9d50c260106d:: ...
@@ -350,7 +351,7 @@ When you delete a virtual server from the resource list, the server isn't delete
 
 This command creates a Hyper Protect virtual server gpg registration key. The resulting output files are required inputs for the `hpvs registration-create` command, where it is used to sign the registration definition file for the deployment that uses your own image.
 
-```
+```sh
 ibmcloud hpvs registration-key-create ID [--gpg-passphrase-path FILE-PATH] [-v VERBOSE]
 ```
 {: pre}
@@ -375,7 +376,8 @@ ibmcloud hpvs registration-key-create ID [--gpg-passphrase-path FILE-PATH] [-v V
 
 ### Example output
 {: #create_regkey}
-```
+
+```sh
 $ ibmcloud hpvs registration-key-create abcdefg
 Enter password>
 Successfully created registration key batch file 'abcdefg_registration-batch.txt' in the current working directory.
@@ -394,14 +396,14 @@ To use this registration key to generate a registration definition file run 'ibm
 
 This command creates a registration definition file that is required to instantiate a Hyper Protect Virtual Server based on an own image.
 
-```
+```sh
 ibmcloud hpvs registration-create [--repository-name REPO-NAME] [--cr-username USER-NAME --cr-pwd-path FILE-PATH | --no-auth] [--allowed-env-keys ENV-KEYS | --no-env] [--image-key-id IMAGE-KEY-ID] [--image-key-public-path PUBLIC-KEY] [--registration-key-private-path PRIVATE-KEY-PATH] [--registration-key-public-path PUBLIC-KEY-PATH] [--gpg-passphrase-path PASS-PHRASE] [--cap-add CAPABILITIES]
 ```
 {: pre}
 
 If you enter the command without any parameters:
 
-```
+```sh
 ibmcloud hpvs registration-create
 ```
 {: pre}
@@ -410,7 +412,7 @@ you are prompted to enter all the parameters.
 
 If the container registry does not require authentication, set the `-no-auth` parameter to prevent prompting. If no environment parameters are required, set the `-no-env` parameter, for example:
 
-```
+```sh
 ibmcloud hpvs registration-create --no-env --no-auth
 ```
 {: pre}
@@ -462,7 +464,7 @@ ibmcloud hpvs registration-create --no-env --no-auth
 In this sample, the registration-key-create command is run with some, but not all, parameters. The output (the last line in sample) shows the command with all parameters.
 You are prompted for the password and the gpg pass phrase. You must use the path to a file that contains the password for the `--cr-pwd-path parameter` and the path to a file that contains the pass phrase for the `--gpg-passphrase-path` parameter. The sample command contains placeholders for those paths.
 
-```
+```sh
 $ ibmcloud hpvs registration-create --registration-key-public-path abcdefg.public --registration-key-private-path abcdefg.private
 Repository name> docker.io/containers/your-image
 Container registry user name> username
