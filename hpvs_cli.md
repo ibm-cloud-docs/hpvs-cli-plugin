@@ -101,7 +101,7 @@ ibmcloud hpvs instance (NAME | CRN) [--output json]
 `NAME`
 :   The name of your new instance. An error message is displayed if you specify a NAME that is not unique, for example,
 
-    ```
+    ```sh
     VS name 'ABC' is ambiguous: more than one VS exist for the provided name: [crn1 crn2].
     ```
     {: pre}
@@ -261,7 +261,7 @@ ibmcloud hpvs instance-update (NAME | CRN)  [(--rd REGISTRATION-DEFINITION | --r
 `NAME`
 :   The name of your new instance. An error message is displayed if you specify a NAME that is not unique, for example,
 
-    ```
+    ```sh
     VS name 'ABC' is ambiguous: more than one VS exist for the provided name: [crn1 crn2].
     ```
     {: pre}
@@ -314,7 +314,7 @@ ibmcloud hpvs instance-delete (NAME | CRN)
 `NAME`
 :   The name of your new instance. An error message is displayed if you specify a NAME that is not unique, for example,
 
-    ```
+    ```sh
     VS name 'ABC' is ambiguous: more than one VS exist for the provided name: [crn1 crn2].
     ```
     {: pre}
