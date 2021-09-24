@@ -104,6 +104,7 @@ ibmcloud hpvs instance (NAME | CRN) [--output json]
     ```sh
     VS name 'ABC' is ambiguous: more than one VS exist for the provided name: [crn1 crn2].
     ```
+    {: screen}
 
     Specify the `CRN` if your instance name is not unique.
 
@@ -263,6 +264,7 @@ ibmcloud hpvs instance-update (NAME | CRN)  [(--rd REGISTRATION-DEFINITION | --r
     ```sh
     VS name 'ABC' is ambiguous: more than one VS exist for the provided name: [crn1 crn2].
     ```
+    {: screen}
 
     Specify the `CRN` if your instance name is not unique.
 
@@ -315,7 +317,8 @@ ibmcloud hpvs instance-delete (NAME | CRN)
     ```sh
     VS name 'ABC' is ambiguous: more than one VS exist for the provided name: [crn1 crn2].
     ```
-
+    {: screen}
+    
     Specify the `CRN` if your instance name is not unique.
 
 `CRN`
