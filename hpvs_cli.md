@@ -2,7 +2,7 @@
 
 copyright:
   years: 2020, 2021
-lastupdated: "2021-06-18"
+lastupdated: "2021-09-28"
 
 keywords: commands, cluster resource, hpvs-cli plugin, hpvs CLI, hpvs-cli command line , hpvs-cli shell
 
@@ -26,7 +26,7 @@ subcollection: hpvs-cli-plugin
 Use the {{site.data.keyword.hpvs}} CLI to list, create, or delete your {{site.data.keyword.cloud}} {{site.data.keyword.hpvs}} instances.
 {: shortdesc}
 
-The {{site.data.keyword.hpvs}} CLI is available for the amd64 architecture on Linux&reg;, Windows&reg;, and Mac.
+The {{site.data.keyword.hpvs}} CLI is available for the amd64 architecture and IBM Z platform (s390x architecture) on Linux&reg;, Windows&reg;, and Mac.
 
 ## Prerequisites
 {: #prerequisites_hpvs_cli_plugin}
