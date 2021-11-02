@@ -2,7 +2,7 @@
 
 copyright:
   years: 2020, 2021
-lastupdated: "2021-09-28"
+lastupdated: "2021-10-28"
 
 keywords: commands, cluster resource, hpvs-cli plugin, hpvs CLI, hpvs-cli command line , hpvs-cli shell
 
@@ -26,7 +26,7 @@ subcollection: hpvs-cli-plugin
 Use the {{site.data.keyword.hpvs}} CLI to list, create, or delete your {{site.data.keyword.cloud}} {{site.data.keyword.hpvs}} instances.
 {: shortdesc}
 
-The {{site.data.keyword.hpvs}} CLI is available for the amd64 architecture and IBM Z platform (s390x architecture) on Linux&reg;, Windows&reg;, and Mac.
+The {{site.data.keyword.hpvs}} CLI is available for the amd64 architecture and IBM Z platform (s390x architecture) on Linux&reg;, amd64 architecture on Windows&reg;, and Mac.
 
 ## Prerequisites
 {: #prerequisites_hpvs_cli_plugin}
@@ -203,11 +203,10 @@ ibmcloud hpvs instance-create NAME PLAN LOCATION [(--ssh SSH-KEY | --ssh-path SS
 ### Command options
 {: #create_co}
 
-
-`--ssh SSH-KEY` 
+`--ssh SSH-KEY`
 :   Public half of the SSH key to access the virtual server later. `--ssh` or `--ssh-path` is required when you use an IBM-provided image.
 
-`--ssh-path SSH-KEY-PATH` 
+`--ssh-path SSH-KEY-PATH`
 :   File path to the file that contains the public half of the SSH key to access the virtual server later. `--ssh` or `--ssh-path` is required when you use an IBM-provided image.
 
 `--rd REGISTRATION-DEFINITION`
@@ -219,10 +218,10 @@ ibmcloud hpvs instance-create NAME PLAN LOCATION [(--ssh SSH-KEY | --ssh-path SS
 `-i IMAGE-TAG`
 :   The image tag for the BYOI server image. Required if you're using your own image.
 
-`-t TAG` 
+`-t TAG`
 :   Use tags to organize your resources. Tags are visible account-wide. Optional. Multiple tags are permitted, for example, `-t tag1 -t tag2`.
 
-`-g RESOURCE-GROUP-ID | RESOURCE-GROUP-NAME` 
+`-g RESOURCE-GROUP-ID | RESOURCE-GROUP-NAME`
 :   The resource group to which your {{site.data.keyword.hpvs}} instance belongs for access control and billing purposes, for example, `Default`. To list all of your resource groups, run `ibmcloud resource groups`. Optional.
 
 `-e ENV-CONFIG`
@@ -323,14 +322,14 @@ ibmcloud hpvs instance-delete (NAME | CRN)
 VS name 'ABC' is ambiguous: more than one VS exist for the provided name: [crn1 crn2].
 ```
 {: codeblock}
-    
+
 Specify the `CRN` if your instance name is not unique.
 
 `CRN`
 :   The server's Cloud resource name (CRN). Specify the `CRN` if `NAME` is not unique. You can run the `ibmcloud hpvs instances` command to get the CRN.
 
 `--force`
-:   Forces the deletion of the {{site.data.keyword.hpvs}} instance without prompting for confirmation. 
+:   Forces the deletion of the {{site.data.keyword.hpvs}} instance without prompting for confirmation.
 
 
 ### Example output
@@ -373,7 +372,7 @@ ibmcloud hpvs registration-key-create ID [--gpg-passphrase-path FILE-PATH] [-v V
 {: #reggpgdetails}
 
 
-`--gpg-passphrase-path FILE-PATH` 
+`--gpg-passphrase-path FILE-PATH`
 :   Is the path for the file that contains the passphrase that is being used for the registration key. The passphrase must consist of at least 6 characters. To make sure that a new line is not appended, use `echo` with `-n` or cat with EOF. If the path is not specified, you are prompted for the passphrase.
 
 `-v, --verbose`
@@ -394,7 +393,7 @@ Successfully exported the public part of the registration key to 'abcdefg.public
 
 Successfully exported the private part of the registration key to 'abcdefg.private' in the current working directory.
 
-To use this registration key to generate a registration definition file run 'ibmcloud hpvs registration-create --registration-key-public-path abcdefg.public --registration-key-private-path abcdefg.private
+To use this registration key to generate a registration definition file run `ibmcloud hpvs registration-create --registration-key-public-path abcdefg.public --registration-key-private-path abcdefg.private`
 ```
 {: codeblock}
 
@@ -404,7 +403,7 @@ To use this registration key to generate a registration definition file run 'ibm
 This command creates a registration definition file that is required to instantiate a Hyper Protect Virtual Server based on an own image.
 
 ```sh
-ibmcloud hpvs registration-create [--repository-name REPO-NAME] [--cr-username USER-NAME --cr-pwd-path FILE-PATH | --no-auth] [--allowed-env-keys ENV-KEYS | --no-env] [--image-key-id IMAGE-KEY-ID] [--image-key-public-path PUBLIC-KEY] [--registration-key-private-path PRIVATE-KEY-PATH] [--registration-key-public-path PUBLIC-KEY-PATH] [--gpg-passphrase-path PASS-PHRASE] [--cap-add CAPABILITIES]
+ibmcloud hpvs registration-create [--repository-name REPO-NAME] [--cr-username USER-NAME --cr-pwd-path FILE-PATH | --no-auth] [--allowed-env-keys ENV-KEYS | --no-env] [--image-key-id IMAGE-KEY-ID] [--image-key-public-path PUBLIC-KEY] [--registration-key-private-path PRIVATE-KEY-PATH] [--registration-key-public-path PUBLIC-KEY-PATH] [--gpg-passphrase-path PASS-PHRASE] [--cap-add CAPABILITIES] 
 ```
 {: pre}
 
@@ -438,7 +437,7 @@ ibmcloud hpvs registration-create --no-env --no-auth
 :   Is the path to the file that contains the container repository password.
 
 `--no-auth`
-:   Is the parameter that must be set if the image does not require authorization to download. In this case, you don't need to provide `cr-username` and `cr-pwd-path` parameters. If you do, these parameters are ignored. 
+:   Is the parameter that must be set if the image does not require authorization to download. In this case, you don't need to provide `cr-username` and `cr-pwd-path` parameters. If you do, these parameters are ignored.
 
 `--allowed-env-keys ENV-KEYS`
 :   Specifies the allowed environment variable keys as a comma-separated list. The keys must be strings of 1 - 64 characters.
@@ -459,11 +458,13 @@ ibmcloud hpvs registration-create --no-env --no-auth
 :   The path for the private key from the registration key pair.
 
 `--gpg-passphrase-path PASS-PHRASE`
-:   The path to a file that contains the `gpg` passphrase used for the private part of the registration key. The passphrase must consist of at least 6 characters. To make sure that a new line is not appended, use `echo` with `-n` or `cat` with EOF. 
+:   The path to a file that contains the `gpg` passphrase used for the private part of the registration key. The passphrase must consist of at least 6 characters. To make sure that a new line is not appended, use `echo` with `-n` or `cat` with EOF.
 
 `--cap-add CAPABILITIES`
-:   The Linux capabilities to be enabled are specified as a comma separated list. 
+:   The Linux capabilities to be enabled are specified as a comma separated list.
 
+The ISV Secrets is a key value pair that is separated by a colon, and you can pass a list secrets that are separated by a comma. Avoid adding spaces after the comma when you are passing multiple secrets. If the size of the secret is large, it is recommended that you pass it by using the `--isv-secrets` command parameter.
+{: note}
 
 ### Example output
 {: #create_regfile}
@@ -472,7 +473,7 @@ In this sample, the registration-key-create command is run with some, but not al
 You are prompted for the password and the gpg pass phrase. You must use the path to a file that contains the password for the `--cr-pwd-path parameter` and the path to a file that contains the pass phrase for the `--gpg-passphrase-path` parameter. The sample command contains placeholders for those paths.
 
 ```sh
-$ ibmcloud hpvs registration-create --registration-key-public-path abcdefg.public --registration-key-private-path abcdefg.private
+$ ibmcloud hpvs registration-create --registration-key-public-path abcdefg.public --registration-key-private-path abcdefg.private 
 Repository name> docker.io/containers/your-image
 Container registry user name> username
 Container registry password>
@@ -482,7 +483,6 @@ Gpg pass phrase for the private part of the registration key>
 OK
 The registration file was successfully created in the current working directory: registration.json.asc
 Complete command executed:
- ibmcloud hpvs registration-create --repository-name=docker.io/containers/your-image --cr-username=username --cr-pwd-path=<PATH> --allowed-env-keys="ENV_PARAM" --registration-key-public-path=abcdefg.public --cap-add=AUDIT_CONTROL,AUDIT_WRITE --registration-key-private-path=abcdefg.private --gpg-passphrase-path=<PATH>
+ ibmcloud hpvs registration-create --repository-name=docker.io/containers/your-image --cr-username=username --cr-pwd-path=<PATH> --allowed-env-keys="ENV_PARAM" --registration-key-public-path=abcdefg.public --cap-add=AUDIT_CONTROL,AUDIT_WRITE --registration-key-private-path=abcdefg.private --gpg-passphrase-path=<PATH>  
  ```
 {: codeblock}
-
