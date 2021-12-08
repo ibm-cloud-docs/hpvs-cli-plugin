@@ -2,7 +2,7 @@
 
 copyright:
   years: 2020, 2021
-lastupdated: "2021-11-12"
+lastupdated: "2021-12-08"
 
 keywords: commands, cluster resource, hpvs-cli plugin, hpvs CLI, hpvs-cli command line , hpvs-cli shell
 
@@ -258,7 +258,7 @@ Provisioning request for service instance 'crn:v1:staging:public:hpvs:dal13:a/10
 This command updates a Hyper Protect virtual server instance.
 
 ```sh
-ibmcloud hpvs instance-update (NAME | CRN)  [(--rd REGISTRATION-DEFINITION | --rd-path REGISTRATION-DEFINITION-PATH)] [-i IMAGE-TAG] [-e ENV-CONFIG1 -e ENV-CONFIG2 ...] [--force]
+ibmcloud hpvs instance-update (NAME | CRN) [--hostname HOST-NAME] [(--rd REGISTRATION-DEFINITION | --rd-path REGISTRATION-DEFINITION-PATH)] [-i IMAGE-TAG] [-e ENV-CONFIG1 -e ENV-CONFIG2 ...] [--force]
 ```
 {: pre}
 
@@ -280,6 +280,8 @@ Specify the `CRN` if your instance name is not unique.
 ### Command options
 {: #details_iu}
 
+`--hostname HOST-NAME`
+:   The hostname that will be set within the {{site.data.keyword.hpvs}} container by using this parameter value.  
 
 `--rd REGISTRATION-DEFINITION`
 :   The encrypted and signed registration definition that is used for [Bring your own server image (BYOI)](https://cloud.ibm.com/docs/hp-virtual-servers?topic=hp-virtual-servers-byoi). `--rd` or `--rd-path` is optional when you use a self-provided image.
