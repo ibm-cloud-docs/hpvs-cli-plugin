@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2020, 2021
-lastupdated: "2021-12-08"
+  years: 2020, 2022
+lastupdated: "2022-02-03"
 
 keywords: commands, cluster resource, hpvs-cli plugin, hpvs CLI, hpvs-cli command line , hpvs-cli shell
 
@@ -357,7 +357,7 @@ When you delete a virtual server from the resource list, the server isn't delete
 ## hpvs registration-key-create
 {: #hpvsregistrationkeycreate}
 
-This command creates a Hyper Protect virtual server gpg registration key. The resulting output files are required inputs for the `hpvs registration-create` command, where it is used to sign the registration definition file for the deployment that uses your own image.
+This command creates a Hyper Protect virtual server gpg registration key. The resulting output files are required as inputs for the `hpvs registration-create` command, where it is used to sign the registration definition file for the deployment that uses your own image (BYOI). You need to run this command only when you do not have the gpg registration key or you have not already created the key pair, and when you want to use your own image (BYOI).
 
 ```sh
 ibmcloud hpvs registration-key-create ID [--gpg-passphrase-path FILE-PATH] [-v VERBOSE]
@@ -401,7 +401,7 @@ To use this registration key to generate a registration definition file run `ibm
 ## hpvs registration-create
 {: #hpvsregistrationfilecreate}
 
-This command creates a registration definition file that is required to instantiate a Hyper Protect Virtual Server based on an own image.
+This command creates a registration definition file that is required to instantiate a Hyper Protect Virtual Server based on an own image. You need to run this command only when you want to use your own image (BYOI).
 
 ```sh
 ibmcloud hpvs registration-create [--repository-name REPO-NAME] [--cr-username USER-NAME --cr-pwd-path FILE-PATH | --no-auth] [--allowed-env-keys ENV-KEYS | --no-env] [--image-key-id IMAGE-KEY-ID] [--image-key-public-path PUBLIC-KEY] [--registration-key-private-path PRIVATE-KEY-PATH] [--registration-key-public-path PUBLIC-KEY-PATH] [--gpg-passphrase-path PASS-PHRASE] [--cap-add CAPABILITIES] [--isv-secrets ISV-SECRETS | --no-isv-secrets]
@@ -436,6 +436,9 @@ ibmcloud hpvs registration-create --no-env --no-auth
 
 `--cr-pwd-path FILE-PATH`
 :   Is the path to the file that contains the container repository password.
+
+To ensure there are no trailing spaces in the file path, you can specify it as `vi -b file_name , :set noeol, :wq`.
+{: note}
 
 `--no-auth`
 :   Is the parameter that must be set if the image does not require authorization to download. In this case, you don't need to provide `cr-username` and `cr-pwd-path` parameters. If you do, these parameters are ignored.
