@@ -2,7 +2,7 @@
 
 copyright:
   years: 2020, 2022
-lastupdated: "2022-02-03"
+lastupdated: "2022-12-14"
 
 keywords: commands, cluster resource, hpvs-cli plugin, hpvs CLI, hpvs-cli command line , hpvs-cli shell
 
@@ -417,6 +417,8 @@ ibmcloud hpvs registration-create
 
 You are prompted to enter all the parameters.
 
+If image is in ICR, the fingerprint of the gpg key that was used to sign the image must be provided when you are prompted for the "Fingerprint", and path to the public key with which it is signed needs to be provided when you are prompted for the "Path to the file containing the image public key".
+
 If the container registry does not require authentication, set the `-no-auth` parameter to prevent prompting. If no environment parameters are required, set the `-no-env` parameter, for example:
 
 ```sh
@@ -450,10 +452,10 @@ To ensure there are no trailing spaces in the file path, you can specify it as `
 :   This parameter can be set if the image does not require any allowed environment variables. In this case, you don't need to provide the `allowed-env-keys` parameter. If you do, it is ignored.
 
 `--image-key-id IMAGE-KEY-ID`
-:   The ID of the root key that was used to sign the image. It must contain 64 characters. If the image-key-id is not specified, the command first tries to determine the ID automatically by requesting the container registry notary service. Optional.
+:   The ID of the root key that was used to sign the image. It must contain 64 characters. If the image-key-id is not specified, the command first tries to determine the ID automatically by requesting the container registry notary service. If the image is in ICR, the fingerprint of the gpg key that is used to sign the image has to be mandatorily provided. It is optional for DCT signed image in Docker Hub.
 
 `--image-key-public-path PUBLIC-KEY`
-:   The path for the file that contains the public part of the key that was used to sign the image. The public part of the key must be a minimum of 20 characters and base64 encoded. If the path is not specified, the command first tries to determine the public part of the key automatically by requesting the container registry notary service. Optional.
+:   The path for the file that contains the public part of the key that was used to sign the image. The public part of the key must be a minimum of 20 characters and base64 encoded. If the path is not specified, the command first tries to determine the public part of the key automatically by requesting the container registry notary service. If the image is present in ICR, path to the gpg public key that is used to sign the image should be mandatorily provided. It is optional for DCT signed image in Docker Hub.
 
 `--registration-key-public-path PRIVATE-KEY-PATH`
 :   The path for the public key from the registration key pair.
