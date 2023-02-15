@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2020, 2022
-lastupdated: "2022-12-14"
+  years: 2020, 2023
+lastupdated: "2022-02-14"
 
 keywords: commands, cluster resource, hpvs-cli plugin, hpvs CLI, hpvs-cli command line , hpvs-cli shell
 
@@ -404,7 +404,7 @@ To use this registration key to generate a registration definition file run `ibm
 This command creates a registration definition file that is required to instantiate a Hyper Protect Virtual Server based on an own image. You need to run this command only when you want to use your own image (BYOI).
 
 ```sh
-ibmcloud hpvs registration-create [--repository-name REPO-NAME] [--cr-username USER-NAME --cr-pwd-path FILE-PATH | --no-auth] [--allowed-env-keys ENV-KEYS | --no-env] [--image-key-id IMAGE-KEY-ID] [--image-key-public-path PUBLIC-KEY] [--registration-key-private-path PRIVATE-KEY-PATH] [--registration-key-public-path PUBLIC-KEY-PATH] [--gpg-passphrase-path PASS-PHRASE] [--cap-add CAPABILITIES] [--isv-secrets ISV-SECRETS | --no-isv-secrets]
+ibmcloud hpvs registration-create [--repository-name REPO-NAME] [--cr-username USER-NAME --cr-pwd-path FILE-PATH | --no-auth] [--allowed-env-keys ENV-KEYS | --no-env] [--image-key-id IMAGE-KEY-ID] [--fingerprint FINGERPRINT] [--image-key-public-path PUBLIC-KEY] [--registration-key-private-path PRIVATE-KEY-PATH] [--registration-key-public-path PUBLIC-KEY-PATH] [--gpg-passphrase-path PASS-PHRASE] [--cap-add CAPABILITIES] [--isv-secrets ISV-SECRETS | --no-isv-secrets]
 ```
 {: pre}
 
@@ -452,7 +452,20 @@ To ensure there are no trailing spaces in the file path, you can specify it as `
 :   This parameter can be set if the image does not require any allowed environment variables. In this case, you don't need to provide the `allowed-env-keys` parameter. If you do, it is ignored.
 
 `--image-key-id IMAGE-KEY-ID`
-:   The ID of the root key that was used to sign the image. It must contain 64 characters. If the image-key-id is not specified, the command first tries to determine the ID automatically by requesting the container registry notary service. If the image is in ICR, the fingerprint of the gpg key that is used to sign the image has to be mandatorily provided. It is optional for DCT signed image in Docker Hub.
+:   The ID of the root key that was used to sign the image. It must contain 64 characters long. If the image-key-id is not specified, the command first tries to determine the ID automatically by requesting the container registry notary service. You are prompted for this parameter for Docker Hub images.
+
+`--fingerprint FINGERPRINT`
+:   If the image is in ICR, the fingerprint of the gpg key that is used to sign the image must be provided. You can get the fingerprint by using the `gpg --list-keys name_of_the_key` command. For example, when you run the `gpg --list-keys latestnewkey` command, the following snippet is an example of the output:
+    ```buildoutcfg
+    pub   rsa4096 2023-01-12 [SCEA] [expires: 2024-04-28]
+          322A65D5B50BF16F5FDB6D7173943217FCD72F51
+    uid           [ultimate] latestnewkey
+    <latestnewkey@example.com>
+    sub   rsa4096 2023-01-1--fingerprint FINGERPRINT2 [SEA] [expires: 2024-04-28]
+    ```
+    {: screen}
+
+    In this example, "322A65D5B50BF16F5FDB6D7173943217FCD72F51" is the  fingerprint.
 
 `--image-key-public-path PUBLIC-KEY`
 :   The path for the file that contains the public part of the key that was used to sign the image. The public part of the key must be a minimum of 20 characters and base64 encoded. If the path is not specified, the command first tries to determine the public part of the key automatically by requesting the container registry notary service. If the image is present in ICR, path to the gpg public key that is used to sign the image should be mandatorily provided. It is optional for DCT signed image in Docker Hub.
