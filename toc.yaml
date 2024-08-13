@@ -1,12 +1,10 @@
 toc:
   properties:
     subcollection: hpvs-cli-plugin
-    version: 2
     audience: software
     href: /docs/hpvs-cli-plugin
     path: hpvs-cli-plugin
     label: IBM Cloud Hyper Protect Virtual Servers CLI reference
-
   entries:
   - navgroup:
       id: reference
